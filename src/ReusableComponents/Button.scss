@@ -1,0 +1,25 @@
+@use "/src/assets/colors";
+@use "/src/assets/font";
+
+.btn {
+  border-radius: 8px;
+  width: 144px;
+  height: 36px;
+}
+
+.btn__news {
+  margin-top: auto;
+  margin-bottom: 26px;
+  background-color: colors.$darkBlue;
+  color: colors.$whitest;
+  font-size: font.$header6;
+}
+
+.btn__cars {
+  margin-top: auto;
+  margin-bottom: 20px;
+  border: 2px solid colors.$accent;
+  background-color: transparent;
+  color: colors.$accent;
+  font-size: font.$header5;
+}

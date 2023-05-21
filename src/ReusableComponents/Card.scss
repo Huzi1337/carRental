@@ -1,0 +1,43 @@
+@use "/src/assets/colors";
+@use "/src/assets/font";
+
+.card {
+  position: relative;
+  width: 280px;
+  border-radius: 4px;
+  background: colors.$white;
+  border-style: solid;
+  border-color: colors.$lightGray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card__news {
+  height: 320px;
+  border-width: 1px;
+  box-shadow: 0px 4px 8px rgba(98, 107, 125, 0.2);
+
+  h6 {
+    padding: 9px 27px;
+  }
+}
+
+.card__vehicles {
+  border-width: 2px;
+  height: 360px;
+  img,
+  .tint {
+    width: 276px;
+    height: 170px;
+    border-radius: 4px 4px 0 0;
+  }
+  .tint {
+    position: absolute;
+    background: linear-gradient(
+      360deg,
+      rgba(18, 44, 145, 0.45) 0%,
+      rgba(217, 217, 217, 0) 100%
+    );
+  }
+}
