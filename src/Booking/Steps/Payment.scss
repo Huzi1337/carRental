@@ -1,0 +1,71 @@
+@use "/src/assets/colors";
+@use "/src/assets/font";
+
+.icon__payment {
+  width: 30px;
+  height: 30px;
+
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.MasterCard {
+  background-image: url(/icons/paymentOptions/MasterCard.svg);
+}
+
+.Visa {
+  background-image: url(/icons/paymentOptions/Visa.svg);
+}
+
+.Bitcoin {
+  background-image: url(/icons/paymentOptions/Bitcoin.svg);
+}
+
+.booking__row.payment {
+  align-items: center;
+  gap: 50px;
+  margin-bottom: 15px;
+}
+
+.booking__col hr:nth-of-type(2) {
+  margin-top: 10px;
+}
+
+.booking__col.cardInfo {
+  gap: 12px;
+
+  input:nth-of-type(1) {
+    width: 360px;
+  }
+
+  .booking__col.cardNo {
+    input {
+      width: 280px;
+    }
+  }
+  .booking__col.ccv {
+    input {
+      width: 100px;
+    }
+  }
+
+  .booking__col.expDate {
+    input {
+      width: 120px;
+    }
+  }
+
+  .booking__row.cardInfo {
+    gap: 30px;
+  }
+}
+
+.booking__row.totalPrice {
+  gap: 40px;
+  margin-bottom: 25px;
+}
+
+.payment__p__info {
+  font-size: font.$textDesc;
+  color: colors.$strongGray;
+}

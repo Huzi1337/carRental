@@ -1,0 +1,43 @@
+@use "/src/assets/colors";
+@use "/src/assets/font";
+
+.section.location {
+  display: flex;
+  flex-direction: column;
+  background-color: colors.$white;
+
+  h3,
+  h5 {
+    color: colors.$dark;
+  }
+
+  h4 {
+    margin: 35px 0 30px 10%;
+    color: colors.$strongGray;
+  }
+
+  h5 {
+    margin-bottom: 5px;
+  }
+
+  .wrapper__location {
+    padding: 0 20%;
+    font-size: font.$text;
+    color: colors.$strongGray;
+  }
+
+  .container__horizontal {
+    position: relative;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .container__vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

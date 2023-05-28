@@ -1,0 +1,21 @@
+@use "/src/assets/colors";
+@use "/src/assets/font";
+
+.progressBar {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  font-size: font.$text;
+  color: colors.$strongGray;
+  margin-bottom: 40px;
+  .line {
+    display: inline-block;
+    width: 7px;
+    height: 2px;
+    border-top: 1px solid colors.$strongGray;
+    margin: 0 7px;
+  }
+  .currentStep {
+    font-weight: 700;
+  }
+}

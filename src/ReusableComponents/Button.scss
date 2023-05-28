@@ -7,6 +7,10 @@
   height: 36px;
 }
 
+.btn:hover {
+  cursor: pointer;
+}
+
 .btn__news {
   margin-top: auto;
   margin-bottom: 26px;
@@ -22,4 +26,51 @@
   background-color: transparent;
   color: colors.$accent;
   font-size: font.$header5;
+  a {
+    color: colors.$accent;
+  }
+}
+
+.btn__form,
+.btn__details {
+  width: 220px;
+  height: 48px;
+  margin-top: 23px;
+  background-color: colors.$accent;
+  color: colors.$white;
+  box-shadow: 0px 4px 8px 2px rgba(42, 111, 219, 0.3);
+}
+
+.btn__back {
+  position: absolute;
+  left: 0px;
+  top: -33px;
+  width: 65px;
+  height: 20px;
+  font-size: font.$header5;
+  color: colors.$strongGray;
+  background-color: transparent;
+  i {
+    width: 7px;
+    height: 10px;
+    display: inline-block;
+    margin-right: 8px;
+    margin-bottom: 1px;
+    background-image: url(/icons/backArrow.svg);
+  }
+}
+
+.btn__outline {
+  height: 40px;
+  padding: 5px 20px;
+  background-color: colors.$white;
+  border: 2px solid colors.$accent;
+  color: colors.$accent;
+  font-size: font.$textBtn;
+}
+
+.btn__outline.fill {
+  background-color: colors.$accent;
+  color: colors.$white;
+  border: none;
 }

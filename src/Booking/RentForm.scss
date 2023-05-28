@@ -1,0 +1,77 @@
+@use "/src/assets/colors";
+@use "/src/assets/font";
+
+.booking__col {
+  display: flex;
+  flex-direction: column;
+
+  input {
+    background-color: colors.$white;
+    border-radius: 4px;
+    border: 1px solid colors.$lightGray;
+    padding: 8px 14px;
+  }
+
+  hr {
+    border-top-width: 2px;
+    border-color: colors.$lightGray;
+    background-color: colors.$lightGray;
+    margin: 5px 0 16px;
+  }
+
+  hr:nth-of-type(2) {
+    margin-top: 130px;
+  }
+  label {
+    font-size: font.$text;
+    line-height: 17px;
+    margin-bottom: 4px;
+    color: colors.$strongGray;
+  }
+}
+
+.booking__row {
+  display: flex;
+  width: 100%;
+}
+
+.booking__row.main {
+  gap: 50px;
+  flex-grow: 1;
+}
+
+.booking__subscript {
+  margin-top: 12px;
+  font-size: font.$text;
+  color: colors.$strongGray;
+  line-height: 20px;
+}
+
+.lg {
+  width: 75%;
+}
+
+.sm {
+  width: 25%;
+  align-items: center;
+  justify-content: space-between;
+
+  .booking__summary {
+    height: auto;
+    width: 100%;
+  }
+  .booking__importantInfo {
+    color: colors.$accent;
+    line-height: 19px;
+    margin: 5px 0 12px 12px;
+    display: flex;
+    gap: 13px;
+    .icon {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      background-size: cover;
+      background-image: url(/icons/formSummary/info.svg);
+    }
+  }
+}

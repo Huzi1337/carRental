@@ -1,0 +1,32 @@
+@use "/src/assets/colors";
+@use "/src/assets/font";
+
+.section.home {
+  background-image: linear-gradient(180deg, #1a7fc380, #373737),
+    url(/home-background.png);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
+  .textBox {
+    color: colors.$white;
+    margin: 0 0 10vh 0;
+    padding: 0 0 0 15vw;
+  }
+
+  .searchBar {
+    width: 80%;
+    max-width: 1260px;
+    height: 90px;
+    display: flex;
+    padding: 18px;
+    gap: 10px;
+    background-color: colors.$accent;
+    margin-bottom: 122px;
+
+    input {
+      flex-direction: column-reverse;
+    }
+  }
+}

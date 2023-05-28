@@ -1,0 +1,31 @@
+@use "/src/assets/colors";
+@use "/src/assets/font";
+
+.booking__col {
+  p {
+    font-size: font.$text;
+    color: colors.$strongGray;
+  }
+  .mileage__subtitle {
+    margin: 20px 0px;
+  }
+  .personalize__slider__container {
+    width: 60%;
+    margin-left: 5px;
+    margin-top: 16px;
+  }
+  hr:nth-of-type(2) {
+    margin-top: 0px;
+  }
+
+  .insurance__btn__wrapper {
+    height: 100%;
+    margin-left: auto;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+  }
+  .insurance__subtitle {
+    margin-bottom: 20px 0 0;
+  }
+}

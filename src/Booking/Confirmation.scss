@@ -1,0 +1,37 @@
+@use "/src/assets/colors";
+@use "/src/assets/font";
+
+.confirmation__container {
+  width: 700px;
+  height: 100%;
+  align-self: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  hr {
+    width: 100%;
+  }
+
+  h3 {
+    text-align: center;
+  }
+  .confirmation__icon {
+    width: 52px;
+    height: 52px;
+    background-image: url(/icons/completed.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 10px 0 20px;
+  }
+
+  .card__summary {
+    flex-grow: 1;
+    border: none;
+    background-color: colors.$whitest;
+  }
+
+  .confirmation__content {
+    font-size: font.$text;
+  }
+}

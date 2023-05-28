@@ -90,6 +90,7 @@ export const cars = [
 ];
 
 export interface Car {
+  id: number;
   modelName: string;
   bodyType: string;
   power: number;

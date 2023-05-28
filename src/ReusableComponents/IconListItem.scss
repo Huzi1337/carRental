@@ -1,0 +1,36 @@
+@use "/src/assets/colors";
+@use "/src/assets/font";
+
+.container {
+  display: flex;
+  margin-top: 10px;
+  gap: 15px;
+  align-items: center;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.content {
+  color: colors.$strongGray;
+  font-size: font.$textDesc;
+  margin: 0;
+}
+
+.icon__globe {
+  background-image: url(/icons/formSummary/globe.svg);
+}
+
+.icon__tripleDots {
+  background-image: url(/icons/formSummary/tripledots.svg);
+  width: 18px;
+  height: 18px;
+}
+
+.icon__calendar {
+  background-image: url(/icons/formSummary/calendar.svg);
+}

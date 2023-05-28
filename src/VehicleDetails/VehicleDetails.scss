@@ -1,0 +1,56 @@
+@use "/src/assets/colors";
+@use "/src/assets/font";
+
+.details__col,
+.details__info,
+.details__row {
+  display: flex;
+}
+
+.details__info {
+  height: 50%;
+  width: 100%;
+  padding: 32px 44px 48px;
+  gap: 30px;
+}
+
+.details__col {
+  flex-direction: column;
+  color: colors.$darkBlue;
+
+  h6 {
+    color: colors.$strongGray;
+  }
+
+  h2 {
+    margin: 44px 0 10px;
+    font-weight: 700;
+  }
+
+  span {
+    font-size: font.$textDesc;
+    color: colors.$strongGray;
+  }
+}
+
+.details__row {
+  margin: 16px 0;
+  gap: 90px;
+}
+
+.large {
+  width: 75%;
+}
+
+.small {
+  width: 25%;
+  align-items: flex-end;
+}
+
+.details__date {
+  width: 220px;
+  height: 70px;
+  padding: 11px;
+  background-color: colors.$white;
+  border-radius: 4px;
+}
