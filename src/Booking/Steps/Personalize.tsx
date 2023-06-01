@@ -14,7 +14,9 @@ const Personalize = () => {
       <p className="mileage__subtitle">
         Increase or decrease your mileage, only pay for what you need
       </p>
-      <Button className="btn__outline">Calculate road</Button>
+      <Button onClick={() => {}} className="btn__outline">
+        Calculate road
+      </Button>
       <div className="personalize__slider__container">
         <InputSlider />
       </div>
@@ -35,7 +37,9 @@ const Personalize = () => {
           </p>
         </div>
         <div className="insurance__btn__wrapper">
-          <Button className="btn__outline">Select</Button>
+          <Button onClick={() => {}} className="btn__outline">
+            Select
+          </Button>
         </div>
       </Card>
       <Card className="card__insurance" tint={false}>
@@ -49,7 +53,9 @@ const Personalize = () => {
           </p>
         </div>
         <div className="insurance__btn__wrapper">
-          <Button className="btn__outline fill">Select</Button>
+          <Button onClick={() => {}} className="btn__outline fill">
+            Select
+          </Button>
         </div>
       </Card>
     </>

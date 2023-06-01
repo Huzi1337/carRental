@@ -1,9 +1,7 @@
-import dayjs from "dayjs";
-
 export type PersonalInfo = {
   firstName: string;
   lastName: string;
-  birthDate: dayjs.Dayjs | null;
+  birthDate: string;
   email: string;
   drivingLicenseId: string;
   phoneNumber: string;
@@ -14,20 +12,24 @@ export type PaymentInfo = {
   name: string;
   cardNumber: string;
   cvv: string;
-  exp: dayjs.Dayjs | null;
+  exp: string;
 };
 
 export type RentEssentials = {
   location: string;
-  startDate: dayjs.Dayjs | null;
-  endDate: dayjs.Dayjs | null;
+  startDate: string;
+  startTime: string;
+  endDate: string;
+  endTime: string;
 };
 
 export type InitialState = {
   location: string;
-  endDate: dayjs.Dayjs | null;
-  startDate: dayjs.Dayjs | null;
-  dropOffLocation: undefined | string;
+  endDate: string;
+  endTime: string;
+  startTime: string;
+  startDate: string;
+  dropOffLocation: string;
   mileage: number;
   price: number;
   currentStep: number;

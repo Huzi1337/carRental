@@ -6,7 +6,7 @@ import { newPosts } from "../../assets/newsHeadline/newPosts";
 import "./News.scss";
 
 export const News = () => {
-  const imageSliderPath = "src/assets/newCars";
+  const imageSliderPath = "/newCars";
   const imageHeadlinePath = "src/assets/newsHeadline";
   const imageCount = 4;
 
@@ -21,7 +21,9 @@ export const News = () => {
             tint={false}
           >
             <h6>{post.content}</h6>
-            <Button className="btn__news">Read more</Button>
+            <Button onClick={() => {}} className="btn__news">
+              Read more
+            </Button>
           </Card>
         ))}
       </div>

@@ -9,8 +9,10 @@ import {
 
 const INITIAL_STATE: InitialState = {
   location: "",
-  startDate: dayjs(),
-  endDate: dayjs(),
+  startDate: dayjs().toISOString(),
+  startTime: dayjs().toISOString(),
+  endDate: dayjs().toISOString(),
+  endTime: dayjs().toISOString(),
   dropOffLocation: "",
   mileage: 10,
   price: 0,
@@ -18,7 +20,7 @@ const INITIAL_STATE: InitialState = {
   personalInfo: {
     firstName: "",
     lastName: "",
-    birthDate: null,
+    birthDate: "",
     email: "",
     drivingLicenseId: "",
     phoneNumber: "",
@@ -28,7 +30,7 @@ const INITIAL_STATE: InitialState = {
     name: "",
     cardNumber: "",
     cvv: "",
-    exp: null,
+    exp: "",
   },
 };
 

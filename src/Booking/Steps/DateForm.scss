@@ -1,0 +1,52 @@
+@use "/src/assets/colors";
+@use "/src/assets/font";
+
+.booking__col {
+  .booking__diff__location {
+    font-size: font.$text;
+    display: flex;
+    margin-bottom: 40px;
+
+    input {
+      width: 20px;
+      height: 20px;
+      margin-right: 23px;
+    }
+    span {
+      align-self: center;
+    }
+  }
+
+  hr:nth-of-type(2) {
+    margin-top: 130px;
+  }
+
+  .booking__input__date {
+    width: 380px;
+    height: 36px;
+
+    margin-bottom: 11px;
+  }
+}
+
+.booking__col.time {
+  margin-left: 10px;
+  margin-right: 45px;
+  input {
+    width: 95px;
+  }
+}
+
+.booking__col.priceValue,
+.booking__col.priceLabel {
+  gap: 1rem;
+  color: colors.$strongGray;
+  .price {
+    color: colors.$dark;
+    font-weight: 700;
+  }
+}
+
+.booking__col.priceValue {
+  margin-left: 50px;
+}

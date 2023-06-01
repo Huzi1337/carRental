@@ -10,7 +10,8 @@ import RentSummary from "./RentSummary";
 import { useSelector, useDispatch } from "react-redux";
 import { nextStep } from "../redux/reducers/bookingSlice";
 import { RootState } from "../redux/store";
-import { useFormik } from "formik";
+import { Form, Formik } from "formik";
+import { InitialState } from "../redux/reducers/bookingTypes";
 
 const FORM_STEPS = [
   [<Date />, "Booking Details"],
@@ -22,36 +23,40 @@ const FORM_STEPS = [
 const RentForm = () => {
   const initialState = useSelector((state: RootState) => state.booking);
   const { currentStep: step } = initialState;
-  const formik = useFormik({
-    initialValues: { ...initialState },
-    onSubmit: (values) => {
-      return console.log(values);
-    },
-  });
+
   const dispatch = useDispatch();
 
   const buttonHandler = () => {
     dispatch(nextStep());
   };
+
+  const onSubmit = (values: InitialState) => {
+    console.log(values);
+    buttonHandler();
+    // if (step === FORM_STEPS.length - 1) ;
+  };
   return (
-    <>
-      <FormProgress />
-      <h3>{FORM_STEPS[step][1]}</h3>
-      <div className="booking__row main">
-        <form className="booking__col lg">{FORM_STEPS[step][0]}</form>
-        <div className="booking__col sm">
-          <div className="booking__summary">
-            <h5 className="booking__importantInfo">
-              <div className="icon"></div>Important Information
-            </h5>
-            <RentSummary contentClass="default" />
+    <Formik initialValues={initialState} onSubmit={onSubmit}>
+      <Form className="formikForm">
+        <FormProgress />
+        <h3>{FORM_STEPS[step][1]}</h3>
+        <div className="booking__row main">
+          <div className="booking__col lg">{FORM_STEPS[step][0]}</div>
+
+          <div className="booking__col sm">
+            <div className="booking__summary">
+              <h5 className="booking__importantInfo">
+                <div className="icon"></div>Important Information
+              </h5>
+              <RentSummary contentClass="default" />
+            </div>
+            <Button onClick={() => {}} className="btn__form">
+              {step === 3 ? "Make Payment" : "Next"}
+            </Button>
           </div>
-          <Button onClick={buttonHandler} className="btn__form">
-            {step === 3 ? "Make Payment" : "Next"}
-          </Button>
         </div>
-      </div>
-    </>
+      </Form>
+    </Formik>
   );
 };
 

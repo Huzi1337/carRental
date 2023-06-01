@@ -4,101 +4,68 @@ import {
   TimePicker,
 } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { useState, ChangeEvent } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Formik, Form, Field } from "formik";
 
+import { RentEssentials } from "../redux/reducers/bookingTypes";
 import { setRentDetails } from "../redux/reducers/bookingSlice";
-import dayjs from "dayjs";
+import { RootState } from "../redux/store";
+
+type SearchBarValues = {
+  location: string;
+  startDate: string;
+  startTime: string;
+  endDate: string;
+  endTime: string;
+};
 
 const SearchBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [location, setLocation] = useState<string>("");
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [startTime, setStartTime] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const [endTime, setEndTime] = useState<Date | null>(null);
+  const {location, startDate, startTime, endDate, endTime} = useSelector((state: RootState) => state.booking)
 
-  const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setLocation(event.target.value);
+  const INITIAL_VALUES: SearchBarValues = {
+    location,
+    startDate,
+    startTime,
+    endDate,
+    endTime,
   };
 
-  const handleStartDateChange = (date: Date | null) => {
-    setStartDate(date);
-    console.log(date);
-  };
-
-  const handleStartTimeChange = (time: Date | null) => {
-    setStartTime(time);
-    console.log(time);
-  };
-
-  const handleEndDateChange = (date: Date | null) => {
-    setEndDate(date);
-  };
-
-  const handleEndTimeChange = (time: Date | null) => {
-    setEndTime(time);
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const timeStart = dayjs(startTime);
-    const timeEnd = dayjs(endTime);
-
-    const searchData = {
+  const handleSubmit = ({
+    location,
+    startDate,
+    startTime,
+    endDate,
+    endTime,
+  }: SearchBarValues) => {
+    const searchData: RentEssentials = {
       location,
-      startDate: dayjs(startDate)
-        .set("hour", timeStart.get("hour"))
-        .set("minute", timeStart.get("minute")),
-      endDate: dayjs(endDate)
-        .set("hour", timeEnd.get("hour"))
-        .set("minute", timeEnd.get("minute")),
+      startDate,
+      startTime,
+      endDate,
+      endTime,
     };
+    console.log(searchData);
     dispatch(setRentDetails(searchData));
     navigate("/vehicles");
   };
 
   return (
-    <form className="searchBar" onSubmit={handleSubmit}>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <input
-          placeholder="Location"
-          value={location}
-          onChange={handleLocationChange}
-        />
-        <div style={{ backgroundColor: "white", borderRadius: 6 }}>
-          <DatePicker
-            sx={{ width: 160 }}
-            label="Start Date"
-            value={startDate}
-            onChange={handleStartDateChange}
-          />
-        </div>
-        <TimePicker
-          sx={{ width: 140 }}
-          label="Time"
-          value={startTime}
-          onChange={handleStartTimeChange}
-          views={["hours", "minutes"]}
-        />
-        <DatePicker
-          sx={{ width: 160 }}
-          label="End Date"
-          value={endDate}
-          onChange={handleEndDateChange}
-        />
-        <TimePicker
-          sx={{ width: 140 }}
-          label="Time"
-          value={endTime}
-          onChange={handleEndTimeChange}
-          views={["hours", "minutes"]}
-        />
-      </LocalizationProvider>
-      <button>Bigass</button>
-    </form>
+    <Formik initialValues={INITIAL_VALUES} onSubmit={handleSubmit}>
+      <Form className="searchBar">
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <Field name="location" placeholder="Location" />
+
+          <Field name="startDate" component={DatePicker}></Field>
+          <Field name="startTime" component={TimePicker}></Field>
+          <Field name="endDate" component={DatePicker}></Field>
+          <Field name="endTime" component={DatePicker}></Field>
+        </LocalizationProvider>
+        <button>Bigass</button>
+      </Form>
+    </Formik>
   );
 };
 

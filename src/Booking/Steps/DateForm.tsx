@@ -1,12 +1,11 @@
-import { Field } from "formik";
-import "./Date.scss";
+import "./DateForm.scss";
 
-const Date = () => {
+const DateForm = () => {
   return (
     <>
       <hr></hr>
       <label>Location</label>
-      <Field name="location" className="booking__input__date"></Field>
+      <input className="booking__input__date"></input>
       <p className="booking__diff__location">
         <input type="checkbox"></input>{" "}
         <span>Return at different location</span>
@@ -49,4 +48,4 @@ const Date = () => {
   );
 };
 
-export default Date;
+export default DateForm;

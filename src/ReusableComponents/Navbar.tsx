@@ -22,7 +22,7 @@ function Navbar() {
 
   return (
     <header className={visible ? "navbar" : "navbar hide"}>
-      <img src="/src/assets/logo.svg"></img>
+      <img src="/logo.svg"></img>
       <nav className="sections">
         <a href="#home">
           <ScrollLink
