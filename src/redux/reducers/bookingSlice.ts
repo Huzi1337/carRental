@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
+
 import {
   PersonalInfo,
   InitialState,
@@ -8,11 +9,11 @@ import {
 } from "./bookingTypes";
 
 const INITIAL_STATE: InitialState = {
-  location: "",
-  startDate: dayjs().toISOString(),
-  startTime: dayjs().toISOString(),
-  endDate: dayjs().toISOString(),
-  endTime: dayjs().toISOString(),
+  location: "Ass Town",
+  startDate: "",
+
+  endDate: "",
+
   dropOffLocation: "",
   mileage: 10,
   price: 0,
@@ -40,6 +41,7 @@ const bookingSlice = createSlice({
   reducers: {
     setRentDetails: (state, action: PayloadAction<RentEssentials>) => {
       state = { ...state, ...action.payload };
+      console.log("state reducer:", state);
     },
     setPersonalInfo: (state, action: PayloadAction<PersonalInfo>) => {
       state.personalInfo = action.payload;

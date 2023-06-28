@@ -16,12 +16,13 @@ export const News = () => {
       <div className="container__horizontal">
         {newPosts.map((post, index) => (
           <Card
+            key={index}
             src={imageHeadlinePath + `/car${index + 1}.png`}
             className="card__news"
             tint={false}
           >
             <h6>{post.content}</h6>
-            <Button onClick={() => {}} className="btn__news">
+            <Button key={index} onClick={() => {}} className="btn__news">
               Read more
             </Button>
           </Card>

@@ -1,71 +1,97 @@
-import {
-  DatePicker,
-  LocalizationProvider,
-  TimePicker,
-} from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Formik, Form, Field } from "formik";
+import { useEffect, useState } from "react";
+import { useForm } from "@mantine/form";
+import { TextInput } from "@mantine/core";
+import { DateTimePicker } from "@mantine/dates";
+import dayjs from "dayjs";
 
-import { RentEssentials } from "../redux/reducers/bookingTypes";
 import { setRentDetails } from "../redux/reducers/bookingSlice";
 import { RootState } from "../redux/store";
 
-type SearchBarValues = {
+import "./SearchBar.scss";
+
+interface SearchBarValues {
   location: string;
-  startDate: string;
-  startTime: string;
-  endDate: string;
-  endTime: string;
-};
+  startDate: Date | string;
+  endDate: Date | string;
+}
 
 const SearchBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {location, startDate, startTime, endDate, endTime} = useSelector((state: RootState) => state.booking)
+  const [localState, setLocalState] = useState<any | null>(null);
+  const { location, startDate, endDate } = useSelector(
+    (state: RootState) => state.booking
+  );
 
-  const INITIAL_VALUES: SearchBarValues = {
-    location,
-    startDate,
-    startTime,
-    endDate,
-    endTime,
-  };
+  console.log("global state:", location, startDate, endDate);
+  const [startDateState, setStartDateState] = useState(startDate);
+
+  const form = useForm<SearchBarValues>({
+    initialValues: {
+      location,
+      startDate:
+        startDateState.length > 0 ? dayjs(startDateState).toDate() : "",
+      endDate: endDate.length > 0 ? dayjs(endDate).toDate() : "",
+    },
+    validate: {
+      location: (value) => (value ? null : "Provide rent location."),
+      startDate: (value) =>
+        value ? null : "Provide the starting date and time.",
+      endDate: (value) => (value ? null : "Provide the ending date and time."),
+    },
+  });
+
+  useEffect(() => {
+    if (!localState) setLocalState({ location, startDate, endDate });
+    if (
+      location &&
+      startDate &&
+      endDate &&
+      localState.location !== location &&
+      localState.startDate !== startDate &&
+      localState.endDate !== endDate
+    ) {
+      setLocalState({ location, startDate, endDate });
+    }
+  }, []);
+
+  console.log("local state:", localState);
 
   const handleSubmit = ({
     location,
     startDate,
-    startTime,
+
     endDate,
-    endTime,
   }: SearchBarValues) => {
-    const searchData: RentEssentials = {
-      location,
-      startDate,
-      startTime,
-      endDate,
-      endTime,
-    };
-    console.log(searchData);
-    dispatch(setRentDetails(searchData));
+    console.log("Handle submit:", { location, startDate, endDate });
+    dispatch(
+      setRentDetails({
+        location,
+        startDate: dayjs(startDate).toISOString(),
+        endDate: dayjs(endDate).toISOString(),
+      })
+    );
     navigate("/vehicles");
   };
 
   return (
-    <Formik initialValues={INITIAL_VALUES} onSubmit={handleSubmit}>
-      <Form className="searchBar">
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Field name="location" placeholder="Location" />
-
-          <Field name="startDate" component={DatePicker}></Field>
-          <Field name="startTime" component={TimePicker}></Field>
-          <Field name="endDate" component={DatePicker}></Field>
-          <Field name="endTime" component={DatePicker}></Field>
-        </LocalizationProvider>
-        <button>Bigass</button>
-      </Form>
-    </Formik>
+    <form className="searchBar" onSubmit={form.onSubmit(handleSubmit)}>
+      <TextInput
+        label="Location"
+        {...form.getInputProps("location")}
+      ></TextInput>
+      <DateTimePicker
+        label="Start Date and Time"
+        {...form.getInputProps("startDate")}
+      ></DateTimePicker>
+      <DateTimePicker
+        label="End Date and Time"
+        {...form.getInputProps("endDate")}
+      ></DateTimePicker>
+      <button type="submit">Bigass</button>
+    </form>
   );
 };
 

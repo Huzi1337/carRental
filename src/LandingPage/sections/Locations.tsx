@@ -10,8 +10,8 @@ export const Locations = () => {
       <GoogleMap></GoogleMap>
       <div className="wrapper__location">
         <div className="container__horizontal">
-          {locationHeadline.map(({ iconPath, title, subTitle }) => (
-            <div className="container__vertical">
+          {locationHeadline.map(({ iconPath, title, subTitle }, index) => (
+            <div key={index} className="container__vertical">
               <img src={iconPath} width="30px" height="30px"></img>
               <h3>{title}</h3>
               <h6>{subTitle}</h6>

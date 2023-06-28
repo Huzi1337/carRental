@@ -1,0 +1,28 @@
+@use "/src/assets/colors";
+@use "/src/assets/font";
+
+.searchBar {
+  width: 80%;
+  max-width: 1260px;
+  height: 90px;
+  display: flex;
+  padding: 18px;
+  gap: 10px;
+  background-color: colors.$accent;
+  margin-bottom: 122px;
+
+  input {
+    flex-direction: column-reverse;
+  }
+
+  .searchBar__inputContainer {
+    position: relative;
+  }
+
+  .searchBar__errorMessage {
+    position: absolute;
+    top: -15px;
+    color: colors.$accent3;
+    font-size: font.$textDesc;
+  }
+}

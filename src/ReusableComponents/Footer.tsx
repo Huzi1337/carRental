@@ -3,7 +3,7 @@ import "./Footer.scss";
 const Footer = () => {
   return (
     <div className="footer" id="#contact">
-      <img src="/src/assets/logo.svg" className="logo"></img>
+      <img src="/logo.svg" className="logo"></img>
       <nav>
         <a href="#home">Home</a>
         <a href="#payments">Payments</a> <a href="#privacy">Privacy Policy</a>
