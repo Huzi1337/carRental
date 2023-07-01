@@ -9,9 +9,10 @@ import "./Vehicles.scss";
 
 interface Props {
   numberOfCars: number;
+  location?: string;
 }
 
-export const Vehicles = ({ numberOfCars }: Props) => {
+export const Vehicles = ({ numberOfCars, location }: Props) => {
   const [cars, setCars] = useState<null | Car[]>(null);
   const navigate = useNavigate();
 
@@ -28,7 +29,7 @@ export const Vehicles = ({ numberOfCars }: Props) => {
   }, []);
   return (
     <div id="#vehicles" className="section vehicles">
-      <h4>Cars</h4>
+      <h4>{location ? `Available Cars in ${location}` : "Cars"}</h4>
       <div className="cars__gridContainer">
         {cars ? (
           cars.map((car, index) => (

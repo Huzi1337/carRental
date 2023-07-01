@@ -1,13 +1,19 @@
+import { UseFormReturnType } from "@mantine/form";
 import "./PersonalInformation.scss";
+import { FormInitialState } from "../../redux/reducers/bookingTypes";
 
-const PersonalInformation = () => {
+const PersonalInformation = ({
+  form,
+}: {
+  form: UseFormReturnType<FormInitialState>;
+}) => {
   return (
     <>
       <hr></hr>
       <label>First Name</label>
-      <input required />
+      <input {...form.getInputProps("firstName")} />
       <label>Last Name</label>
-      <input required />
+      <input {...form.getInputProps("lastName")} />
       <label>Birth Date</label>
       <input required />
       <label>Email</label>

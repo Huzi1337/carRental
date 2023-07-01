@@ -1,17 +1,21 @@
 import RentSummary from "./RentSummary";
 import Button from "../ReusableComponents/Button";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { resetStep } from "../redux/reducers/bookingSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 import "./Confirmation.scss";
+import { resetState } from "../redux/reducers/bookingSlice";
+import { RootState } from "../redux/store";
 
 const Confirmation = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const state = useSelector((state: RootState) => state.booking);
 
   const btnHandler = () => {
+    console.log(state);
     navigate("/");
-    dispatch(resetStep());
+    dispatch(resetState());
   };
   return (
     <div className="confirmation__container">

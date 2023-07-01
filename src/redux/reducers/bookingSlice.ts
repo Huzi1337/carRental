@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import dayjs from "dayjs";
 
 import {
   PersonalInfo,
   InitialState,
   RentEssentials,
   PaymentInfo,
+  BookingDetails,
+  RentOptions,
 } from "./bookingTypes";
 
 const INITIAL_STATE: InitialState = {
@@ -17,56 +18,44 @@ const INITIAL_STATE: InitialState = {
   dropOffLocation: "",
   mileage: 10,
   price: 0,
-  currentStep: 0,
-  personalInfo: {
-    firstName: "",
-    lastName: "",
-    birthDate: "",
-    email: "",
-    drivingLicenseId: "",
-    phoneNumber: "",
-  },
-  payment: {
-    cardProvider: "MasterCard",
-    name: "",
-    cardNumber: "",
-    cvv: "",
-    exp: "",
-  },
+  isComplete: false,
+
+  firstName: "",
+  lastName: "",
+  birthDate: "",
+  email: "",
+  drivingLicenseId: "",
+  phoneNumber: "",
+
+  cardProvider: "MasterCard",
+  name: "",
+  cardNumber: "",
+  cvv: "",
+  exp: "",
 };
 
 const bookingSlice = createSlice({
   name: "booking",
   initialState: INITIAL_STATE,
   reducers: {
-    setRentDetails: (state, action: PayloadAction<RentEssentials>) => {
-      state = { ...state, ...action.payload };
-      console.log("state reducer:", state);
+    setRentState: (
+      state,
+      action: PayloadAction<
+        | RentEssentials
+        | BookingDetails
+        | RentOptions
+        | PersonalInfo
+        | PaymentInfo
+      >
+    ) => {
+      return { ...state, ...action.payload };
     },
-    setPersonalInfo: (state, action: PayloadAction<PersonalInfo>) => {
-      state.personalInfo = action.payload;
+    setIsComplete: (state) => {
+      return { ...state, isComplete: true };
     },
-    setPaymentInfo: (state, action: PayloadAction<PaymentInfo>) => {
-      state.payment = action.payload;
-    },
-    nextStep: (state) => {
-      if (state.currentStep < 4) state.currentStep++;
-    },
-    prevStep: (state) => {
-      if (state.currentStep > 0) state.currentStep--;
-    },
-    resetStep: (state) => {
-      state.currentStep = 0;
-    },
+    resetState: () => INITIAL_STATE,
   },
 });
 
-export const {
-  setRentDetails,
-  setPaymentInfo,
-  setPersonalInfo,
-  nextStep,
-  prevStep,
-  resetStep,
-} = bookingSlice.actions;
+export const { setRentState, setIsComplete, resetState } = bookingSlice.actions;
 export default bookingSlice.reducer;

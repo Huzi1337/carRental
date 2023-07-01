@@ -1,36 +1,54 @@
-export type PersonalInfo = {
+export interface PersonalInfo {
   firstName: string;
   lastName: string;
   birthDate: string;
   email: string;
   drivingLicenseId: string;
   phoneNumber: string;
-};
+}
 
-export type PaymentInfo = {
+export interface PaymentInfo {
   cardProvider: "MasterCard" | "Visa" | "Bitcoin";
   name: string;
   cardNumber: string;
   cvv: string;
   exp: string;
-};
+}
 
-export type RentEssentials = {
+export interface RentEssentials {
   location: string;
   startDate: string;
 
   endDate: string;
-};
+}
 
-export type InitialState = {
-  location: string;
-  endDate: string;
-
-  startDate: string;
+export interface BookingDetails extends RentEssentials {
   dropOffLocation: string;
-  mileage: number;
+}
+
+export interface RentOptions {
   price: number;
-  currentStep: number;
-  personalInfo: undefined | PersonalInfo;
-  payment: undefined | PaymentInfo;
-};
+  mileage: number;
+}
+
+export interface BookingProcessDetails {
+  dropOffLocation: string;
+  isComplete: boolean;
+}
+
+export interface InitialState
+  extends PersonalInfo,
+    PaymentInfo,
+    RentEssentials,
+    RentOptions,
+    BookingProcessDetails {}
+
+export interface FormInitialState
+  extends PersonalInfo,
+    PaymentInfo,
+    RentOptions,
+    BookingProcessDetails {
+  location: string;
+  startDate: Date;
+  endDate: Date;
+}

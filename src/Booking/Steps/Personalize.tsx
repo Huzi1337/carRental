@@ -1,11 +1,17 @@
+import { UseFormReturnType } from "@mantine/form";
 import Button from "../../ReusableComponents/Button";
 import Card from "../../ReusableComponents/Card";
 
-import InputSlider from "../../ReusableComponents/InputSlider";
+import { Slider } from "@mantine/core";
 
 import "./Personalize.scss";
+import { FormInitialState } from "../../redux/reducers/bookingTypes";
 
-const Personalize = () => {
+const Personalize = ({
+  form,
+}: {
+  form: UseFormReturnType<FormInitialState>;
+}) => {
   return (
     <>
       <hr></hr>
@@ -18,7 +24,7 @@ const Personalize = () => {
         Calculate road
       </Button>
       <div className="personalize__slider__container">
-        <InputSlider />
+        <Slider {...form.getInputProps("mileage")} />
       </div>
 
       <hr></hr>

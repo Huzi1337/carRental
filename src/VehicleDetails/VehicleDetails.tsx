@@ -5,17 +5,44 @@ import Footer from "../ReusableComponents/Footer";
 import Card from "../ReusableComponents/Card";
 import Container from "../ReusableComponents/Container";
 import { useNavigate } from "react-router-dom";
+import { DateTimePicker } from "@mantine/dates";
+import { UseFormReturnType, useForm } from "@mantine/form";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./VehicleDetails.scss";
 import Button from "../ReusableComponents/Button";
 
 import { API_URL } from "../assets/data/urls";
 import { Car } from "../assets/data/types";
+import { RootState } from "../redux/store";
+import { setRentState } from "../redux/reducers/bookingSlice";
+
+import dayjs from "dayjs";
+
+interface RentDateConfirmation {
+  startDate: Date;
+  endDate: Date;
+}
 
 const VehicleDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
+  const dispatch = useDispatch();
   const [car, setCar] = useState<null | Car>(null);
+  const { startDate, endDate, location } = useSelector(
+    (state: RootState) => state.booking
+  );
+  const form = useForm<RentDateConfirmation>({
+    initialValues: {
+      startDate: dayjs(startDate).toDate(),
+      endDate: dayjs(endDate).toDate(),
+    },
+    validate: {
+      startDate: (value) =>
+        value ? null : "Provide the starting date and time.",
+      endDate: (value) => (value ? null : "Provide the ending date and time."),
+    },
+  });
 
   useEffect(() => {
     params.vehicleId
@@ -30,7 +57,16 @@ const VehicleDetails = () => {
     navigate("/vehicles");
   };
 
-  const bookButtonHandler = () => {
+  const bookButtonHandler = ({
+    values: { startDate, endDate },
+  }: UseFormReturnType<RentDateConfirmation>) => {
+    dispatch(
+      setRentState({
+        location,
+        startDate: dayjs(startDate).toISOString(),
+        endDate: dayjs(endDate).toISOString(),
+      })
+    );
     navigate(`/booking/${params.vehicleId}`);
   };
 
@@ -64,12 +100,23 @@ const VehicleDetails = () => {
             </div>
             <div className="details__col small">
               <div className="details__date">
-                <input></input>
-                <input></input>
+                <DateTimePicker
+                  {...form.getInputProps("startDate")}
+                  variant="unstyled"
+                  valueFormat="ddd DD MMM, YYYY hh:mm a"
+                />
+                <DateTimePicker
+                  {...form.getInputProps("endDate")}
+                  variant="unstyled"
+                  valueFormat="ddd DD MMM, YYYY hh:mm a"
+                />
               </div>
               <h2>$420</h2>
               <span>$69 per 24h</span>
-              <Button onClick={bookButtonHandler} className="btn__details">
+              <Button
+                onClick={() => bookButtonHandler(form)}
+                className="btn__details"
+              >
                 Book
               </Button>
             </div>

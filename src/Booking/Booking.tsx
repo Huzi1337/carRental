@@ -9,14 +9,15 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
 const Booking = () => {
-  const step = useSelector((state: RootState) => state.booking.currentStep);
+  const store = useSelector((state: RootState) => state.booking);
+  const { isComplete } = store;
 
   return (
     <>
       <Container className="container__booking">
         <Navbar></Navbar>
         <Card className="card__booking" tint={false}>
-          {step != 4 ? <RentForm /> : <Confirmation />}
+          {!isComplete ? <RentForm initialValues={store} /> : <Confirmation />}
         </Card>
       </Container>
       <Footer></Footer>

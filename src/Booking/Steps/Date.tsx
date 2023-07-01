@@ -1,32 +1,30 @@
-import { Field } from "formik";
-import "./Date.scss";
+import { DateTimePicker } from "@mantine/dates";
+import { UseFormReturnType } from "@mantine/form";
 
-const Date = () => {
+import "./Date.scss";
+import { FormInitialState } from "../../redux/reducers/bookingTypes";
+
+const Date = ({ form }: { form: UseFormReturnType<FormInitialState> }) => {
   return (
     <>
       <hr></hr>
       <label>Location</label>
-      <Field name="location" className="booking__input__date"></Field>
+      <input
+        {...form.getInputProps("location")}
+        className="booking__input__date"
+      ></input>
       <p className="booking__diff__location">
         <input type="checkbox"></input>{" "}
         <span>Return at different location</span>
       </p>
       <div className="booking__row">
         <div className="booking__col">
-          <label>Pick-up date</label>
-          <input></input>
-        </div>
-        <div className="booking__col time">
-          <label>Time</label>
-          <input></input>
+          <label>Pick-up Date and Time</label>
+          <DateTimePicker {...form.getInputProps("startDate")} />
         </div>
         <div className="booking__col">
-          <label>Drop-off date</label>
-          <input></input>
-        </div>
-        <div className="booking__col time">
-          <label>Time</label>
-          <input></input>
+          <label>Drop-off Date and Time</label>
+          <DateTimePicker {...form.getInputProps("endDate")} />
         </div>
       </div>
       <hr></hr>

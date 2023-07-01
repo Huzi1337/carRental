@@ -2,6 +2,7 @@ import "./Button.scss";
 
 interface Props {
   onClick: () => void;
+  submit: boolean;
   className:
     | "btn__cars"
     | "btn__news"
@@ -13,13 +14,21 @@ interface Props {
   children?: React.ReactNode;
 }
 
-const Button = ({ className, children, onClick }: Props) => {
+const Button = ({ className, children, onClick, submit }: Props) => {
   return (
-    <button onClick={onClick} className={`btn ${className}`}>
+    <button
+      type={submit ? "submit" : "button"}
+      onClick={onClick}
+      className={`btn ${className}`}
+    >
       {" "}
       {children}
     </button>
   );
+};
+
+Button.defaultProps = {
+  submit: false,
 };
 
 export default Button;

@@ -8,7 +8,7 @@ export const Home = () => {
         <h1>Rent-a-car with professionals.</h1>
         <h2>Feel the guarantee of safety with us.</h2>
       </div>
-      <SearchBar />
+      <SearchBar key="searchBar" />
     </div>
   );
 };

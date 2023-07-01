@@ -1,8 +1,11 @@
+import { UseFormReturnType } from "@mantine/form";
+import { FormInitialState } from "../../redux/reducers/bookingTypes";
 import "./Payment.scss";
+import { Radio } from "@mantine/core";
 
 const PAYMENT_OPTIONS = ["MasterCard", "Visa", "Bitcoin"];
 
-const Payment = () => {
+const Payment = ({ form }: { form: UseFormReturnType<FormInitialState> }) => {
   return (
     <>
       <hr></hr>
@@ -16,13 +19,20 @@ const Payment = () => {
         Free cancellation.
       </p>
       <hr></hr>
-      {PAYMENT_OPTIONS.map((option) => (
-        <div className="booking__row payment" key={option}>
-          <input value={option} type="radio" name="payment"></input>
-          <div className={`icon__payment ${option}`}></div>{" "}
-          <label>{option}</label>
-        </div>
-      ))}
+      <Radio.Group
+        name="favoriteFramework"
+        label="Select your favorite framework/library"
+        description="This is anonymous"
+        withAsterisk
+      >
+        {PAYMENT_OPTIONS.map((option) => (
+          <div className="booking__row payment" key={option}>
+            <Radio value={option} />
+            <div className={`icon__payment ${option}`}></div>{" "}
+            <label>{option}</label>
+          </div>
+        ))}
+      </Radio.Group>
       <hr></hr>
 
       <div className="booking__col cardInfo">
