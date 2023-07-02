@@ -38,7 +38,7 @@ const Payment = ({ form, rentCost }: Props) => {
       <div className="booking__col cardInfo">
         <div className="booking__col">
           <label>Cardholder Name</label>
-          <input></input>
+          <TextInput {...form.getInputProps("name")}></TextInput>
         </div>
 
         <div className="booking__row cardInfo">
