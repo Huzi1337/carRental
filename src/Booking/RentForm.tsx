@@ -118,8 +118,7 @@ const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
       return;
     }
 
-    const { location, dropOffLocation, startDate, endDate, price, mileage } =
-      values;
+    const { location, dropOffLocation, startDate, endDate, mileage } = values;
     let isValid = true;
     switch (currentStep) {
       case 0:
@@ -142,7 +141,7 @@ const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
       case 1:
         dispatch(
           setRentState({
-            price,
+            price: memoizedRentCost,
             mileage,
           })
         );
