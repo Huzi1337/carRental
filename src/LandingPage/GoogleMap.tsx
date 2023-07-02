@@ -17,11 +17,11 @@ const cities: City[] = [
 
 const GoogleMap: React.FC = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
-  const markersRef = useRef<google.maps.Marker[]>([]);
-  const mapInstanceRef = useRef<google.maps.Map | null>(null);
+  const markersRef = useRef<globalThis.google.maps.Marker[]>([]);
+  const mapInstanceRef = useRef<globalThis.google.maps.Map | null>(null);
 
   useEffect(() => {
-    const mapOptions: google.maps.MapOptions = {
+    const mapOptions: globalThis.google.maps.MapOptions = {
       center: { lat: 51.9194, lng: 19.1451 }, // Center of Poland
       zoom: 6,
       disableDefaultUI: true,
