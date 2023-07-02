@@ -10,24 +10,35 @@ import RentSummary from "./RentSummary";
 import { useDispatch } from "react-redux";
 import { setIsComplete, setRentState } from "../redux/reducers/bookingSlice";
 import {
-  FormInitialState,
+  IFormInitialState,
   InitialState,
-  PaymentInfo,
-  PersonalInfo,
+  IPaymentInfo,
+  IPersonalInfo,
 } from "../redux/reducers/bookingTypes";
 import { UseFormReturnType, useForm } from "@mantine/form";
 
 import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import dayjs from "dayjs";
+import { calculateRentCost } from "../utils/calculateRentCost";
 
 const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
-  const params = useParams();
-  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
 
-  const { startDate, endDate } = initialValues;
-  const form = useForm<FormInitialState>({
+  const incrementCurrentStep = () => {
+    setCurrentStep((prevStep: number) => prevStep + 1);
+  };
+
+  const decrementCurrentStep = () => {
+    setCurrentStep((prevStep: number) => prevStep - 1);
+  };
+
+  const params = useParams();
+  const navigate = useNavigate();
+
+  const { startDate, endDate, pricePerDay } = initialValues;
+
+  const form = useForm<IFormInitialState>({
     initialValues: {
       ...initialValues,
       startDate: dayjs(startDate).toDate(),
@@ -49,41 +60,84 @@ const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
       location: (value) =>
         value.length < 3 ? "Location name is too short." : null,
       firstName: (value) =>
-        value.length > 0 ? "Please provide your first name." : null,
+        value.length === 0 ? "Please provide your first name." : null,
       lastName: (value) =>
-        value.length > 0 ? "Please provide your last name." : null,
-      birthDate: (value) =>
-        value.length > 0
-          ? dayjs(value).diff(dayjs(), "year") < 18
-            ? "You must be at least 18 years old to rent a car."
-            : null
-          : "Please provide your birth date.",
+        value.length === 0 ? "Please provide your last name." : null,
+      // birthDate: (value) =>
+      //   value.length > 0
+      //     ? dayjs(value).diff(dayjs(), "year") < 18
+      //       ? "You must be at least 18 years old to rent a car."
+      //       : null
+      //     : "Please provide your birth date.",
     },
   });
 
+  const memoizedRentCost = useMemo(
+    () =>
+      calculateRentCost(
+        form.values.startDate,
+        form.values.endDate,
+        pricePerDay
+      ),
+    [form.values.startDate, form.values.endDate, pricePerDay]
+  );
+
   const FORM_STEPS = [
-    [<Date form={form} />, "Booking Details"],
+    [
+      <Date
+        rentCost={memoizedRentCost}
+        pricePerDay={pricePerDay}
+        form={form}
+      />,
+      "Booking Details",
+    ],
     [<Personalize form={form} />, "Personalize Your Rent"],
     [<PersonalInformation form={form} />, "Personal Information"],
-    [<Payment form={form} />, "Payment"],
+    [<Payment rentCost={memoizedRentCost} form={form} />, "Payment"],
   ];
   const dispatch = useDispatch();
 
-  const buttonClickHandler = ({
-    values,
-  }: UseFormReturnType<FormInitialState>) => {
+  const stepValidationHandler = (values: { [key: string]: any }) => {
+    let stepValid = true;
+    Object.keys(values).forEach((key) => {
+      form.validateField(key);
+      if (!form.isValid(key)) {
+        console.log(form.errors);
+        stepValid = false;
+      }
+    });
+    return stepValid;
+  };
+
+  const buttonClickHandler = (
+    { values }: UseFormReturnType<IFormInitialState>,
+    direction: "next" | "back"
+  ) => {
+    if (currentStep === 0 && direction === "back") {
+      navigate(`/vehicles/${params.vehicleId}`);
+      return;
+    }
+
     const { location, dropOffLocation, startDate, endDate, price, mileage } =
       values;
+    let isValid = true;
     switch (currentStep) {
       case 0:
-        dispatch(
-          setRentState({
-            location,
-            dropOffLocation,
-            startDate: dayjs(startDate).toISOString(),
-            endDate: dayjs(endDate).toISOString(),
-          })
-        );
+        const rentEssentials = {
+          location,
+          dropOffLocation,
+          startDate,
+          endDate,
+        };
+        isValid = stepValidationHandler(rentEssentials);
+        if (isValid)
+          dispatch(
+            setRentState({
+              ...rentEssentials,
+              startDate: dayjs(startDate).toISOString(),
+              endDate: dayjs(endDate).toISOString(),
+            })
+          );
         break;
       case 1:
         dispatch(
@@ -102,73 +156,71 @@ const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
           email,
           drivingLicenseId,
           phoneNumber,
-        }: PersonalInfo = values;
-        dispatch(
-          setRentState({
-            firstName,
-            lastName,
-            birthDate,
-            email,
-            drivingLicenseId,
-            phoneNumber,
-          })
-        );
+        }: IPersonalInfo = values;
+        const personalInfo = {
+          firstName,
+          lastName,
+          birthDate,
+          email,
+          drivingLicenseId,
+          phoneNumber,
+        };
+        isValid = stepValidationHandler(personalInfo);
+        if (isValid)
+          dispatch(
+            setRentState({
+              ...personalInfo,
+            })
+          );
         break;
       case 3:
-        const { cardProvider, name, cardNumber, cvv, exp }: PaymentInfo =
+        const { cardProvider, name, cardNumber, cvv, exp }: IPaymentInfo =
           values;
-        dispatch(
-          setRentState({
-            cardProvider,
-            name,
-            cardNumber,
-            cvv,
-            exp,
-          })
-        );
+        const paymentInfo = { cardProvider, name, cardNumber, cvv, exp };
+        isValid = stepValidationHandler(paymentInfo);
+        if (isValid)
+          dispatch(
+            setRentState({
+              cardProvider,
+              name,
+              cardNumber,
+              cvv,
+              exp,
+            })
+          );
         break;
       default:
         console.log("Rent Form: step out bounds", currentStep);
         break;
     }
-  };
 
-  const incrementCurrentStep = () => {
-    setCurrentStep((prevStep: number) => prevStep + 1);
-  };
+    if (direction === "next" && isValid) {
+      console.log("form errors:", form.errors, form.isValid());
+      if (currentStep === FORM_STEPS.length - 1) {
+        dispatch(setIsComplete());
+        return;
+      }
 
-  const decrementCurrentStep = () => {
-    setCurrentStep((prevStep: number) => prevStep - 1);
-  };
+      incrementCurrentStep();
 
-  const backButtonHandler = (values: UseFormReturnType<FormInitialState>) => {
-    if (currentStep === 0) {
-      navigate(`/vehicles/${params.vehicleId}`);
-      return;
+      console.log("After incrementing current step: ", currentStep);
+    } else if (direction === "back") {
+      decrementCurrentStep();
     }
-    buttonClickHandler(values);
-    decrementCurrentStep();
-  };
-
-  const nextButtonHandler = (values: UseFormReturnType<FormInitialState>) => {
-    buttonClickHandler(values);
-    console.log("form errors:", form.errors, form.isValid());
-    if (currentStep === FORM_STEPS.length - 1) {
-      dispatch(setIsComplete());
-      return;
-    }
-
-    incrementCurrentStep();
-
-    console.log("After incrementing current step: ", currentStep);
   };
 
   return (
     <>
-      <Button onClick={() => backButtonHandler(form)} className="btn__back">
+      <Button
+        onClick={() => buttonClickHandler(form, "back")}
+        className="btn__back"
+      >
         <i></i>Back
       </Button>
-      <FormProgress />
+      <FormProgress
+        currentStep={currentStep}
+        numberOfSteps={FORM_STEPS.length}
+      />
       <h3>
         {currentStep < FORM_STEPS.length ? FORM_STEPS[currentStep][1] : null}
       </h3>
@@ -182,12 +234,17 @@ const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
             <h5 className="booking__importantInfo">
               <div className="icon"></div>Important Information
             </h5>
-            <RentSummary contentClass="default" />
+            <RentSummary
+              startDate={form.values.startDate}
+              endDate={form.values.endDate}
+              rentCost={memoizedRentCost}
+              contentClass="default"
+            />
           </div>
           <Button
             submit={true}
             onClick={() => {
-              nextButtonHandler(form);
+              buttonClickHandler(form, "next");
             }}
             className="btn__form"
           >

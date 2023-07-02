@@ -1,20 +1,46 @@
 import { DateTimePicker } from "@mantine/dates";
 import { UseFormReturnType } from "@mantine/form";
+import { TextInput, Checkbox } from "@mantine/core";
+
+import { useState } from "react";
 
 import "./Date.scss";
-import { FormInitialState } from "../../redux/reducers/bookingTypes";
+import { IFormInitialState } from "../../redux/reducers/bookingTypes";
 
-const Date = ({ form }: { form: UseFormReturnType<FormInitialState> }) => {
+interface Props {
+  form: UseFormReturnType<IFormInitialState>;
+  pricePerDay: number;
+  rentCost: number;
+}
+
+const Date = ({ form, pricePerDay, rentCost }: Props) => {
+  const [isDifferentDropOffLocation, setIsDifferentDropOffLocation] =
+    useState(false);
+
   return (
     <>
       <hr></hr>
-      <label>Location</label>
-      <input
+      <label>Pick-up Location</label>
+      <TextInput
         {...form.getInputProps("location")}
         className="booking__input__date"
-      ></input>
+      ></TextInput>
+      {isDifferentDropOffLocation && (
+        <>
+          <label>Drop-off Location</label>
+          <TextInput
+            {...form.getInputProps("dropOffLocation")}
+            className="booking__input__date"
+          ></TextInput>
+        </>
+      )}
       <p className="booking__diff__location">
-        <input type="checkbox"></input>{" "}
+        <Checkbox
+          checked={isDifferentDropOffLocation}
+          onChange={(event) =>
+            setIsDifferentDropOffLocation(event.currentTarget.checked)
+          }
+        ></Checkbox>
         <span>Return at different location</span>
       </p>
       <div className="booking__row">
@@ -34,8 +60,8 @@ const Date = ({ form }: { form: UseFormReturnType<FormInitialState> }) => {
           <h6>Cost per 24h:</h6>
         </div>
         <div className="booking__col priceValue">
-          <h6 className="price">$300</h6>
-          <h6>$69</h6>
+          <h6 className="price">${rentCost}</h6>
+          <h6>${pricePerDay}</h6>
         </div>
       </div>
 

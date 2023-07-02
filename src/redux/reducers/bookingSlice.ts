@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import {
-  PersonalInfo,
+  IPersonalInfo,
   InitialState,
-  RentEssentials,
-  PaymentInfo,
-  BookingDetails,
-  RentOptions,
+  IRentEssentials,
+  IPaymentInfo,
+  IBookingDetails,
+  IRentOptions,
 } from "./bookingTypes";
 
 const INITIAL_STATE: InitialState = {
@@ -32,6 +32,7 @@ const INITIAL_STATE: InitialState = {
   cardNumber: "",
   cvv: "",
   exp: "",
+  pricePerDay: 1,
 };
 
 const bookingSlice = createSlice({
@@ -41,14 +42,18 @@ const bookingSlice = createSlice({
     setRentState: (
       state,
       action: PayloadAction<
-        | RentEssentials
-        | BookingDetails
-        | RentOptions
-        | PersonalInfo
-        | PaymentInfo
+        | IRentEssentials
+        | IBookingDetails
+        | IRentOptions
+        | IPersonalInfo
+        | IPaymentInfo
       >
     ) => {
       return { ...state, ...action.payload };
+    },
+    setPricePerDay: (state, action: PayloadAction<number>) => {
+      console.log(action.payload);
+      return { ...state, pricePerDay: action.payload };
     },
     setIsComplete: (state) => {
       return { ...state, isComplete: true };
@@ -57,5 +62,6 @@ const bookingSlice = createSlice({
   },
 });
 
-export const { setRentState, setIsComplete, resetState } = bookingSlice.actions;
+export const { setRentState, setPricePerDay, setIsComplete, resetState } =
+  bookingSlice.actions;
 export default bookingSlice.reducer;

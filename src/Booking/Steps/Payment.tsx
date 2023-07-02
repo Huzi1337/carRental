@@ -1,17 +1,22 @@
 import { UseFormReturnType } from "@mantine/form";
-import { FormInitialState } from "../../redux/reducers/bookingTypes";
+import { IFormInitialState } from "../../redux/reducers/bookingTypes";
 import "./Payment.scss";
-import { Radio } from "@mantine/core";
+import { Radio, NumberInput, TextInput } from "@mantine/core";
 
 const PAYMENT_OPTIONS = ["MasterCard", "Visa", "Bitcoin"];
 
-const Payment = ({ form }: { form: UseFormReturnType<FormInitialState> }) => {
+interface Props {
+  form: UseFormReturnType<IFormInitialState>;
+  rentCost: number;
+}
+
+const Payment = ({ form, rentCost }: Props) => {
   return (
     <>
       <hr></hr>
       <div className="booking__row totalPrice">
         <h6>Total Price:</h6>
-        <h6>$420</h6>
+        <h6>${rentCost}</h6>
       </div>
       <p className="payment__p__info">
         Basic Insurance cost included. <br />
@@ -19,12 +24,7 @@ const Payment = ({ form }: { form: UseFormReturnType<FormInitialState> }) => {
         Free cancellation.
       </p>
       <hr></hr>
-      <Radio.Group
-        name="favoriteFramework"
-        label="Select your favorite framework/library"
-        description="This is anonymous"
-        withAsterisk
-      >
+      <Radio.Group>
         {PAYMENT_OPTIONS.map((option) => (
           <div className="booking__row payment" key={option}>
             <Radio value={option} />
@@ -44,11 +44,15 @@ const Payment = ({ form }: { form: UseFormReturnType<FormInitialState> }) => {
         <div className="booking__row cardInfo">
           <div className="booking__col cardNo">
             <label>Credit Card Number</label>
-            <input></input>
+            <NumberInput
+              hideControls
+              maxLength={16}
+              formatter={(value) => value.replace(/(\d{4})(?=\d)/g, "$1 ")}
+            ></NumberInput>
           </div>
           <div className="booking__col ccv">
             <label>CCV</label>
-            <input></input>
+            <NumberInput maxLength={3} hideControls></NumberInput>
           </div>
         </div>
         <div className="booking__col expDate">

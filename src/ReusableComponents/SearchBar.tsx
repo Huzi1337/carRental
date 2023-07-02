@@ -33,7 +33,7 @@ const SearchBar = () => {
       endDate: endDate.length > 0 ? dayjs(endDate).toDate() : "",
     },
     validate: {
-      location: (value) => (value ? null : "Provide rent location."),
+      location: (value) => (value.length > 2 ? null : "Provide rent location."),
       startDate: (value) =>
         value ? null : "Provide the starting date and time.",
       endDate: (value) => (value ? null : "Provide the ending date and time."),

@@ -1,4 +1,4 @@
-export interface PersonalInfo {
+export interface IPersonalInfo {
   firstName: string;
   lastName: string;
   birthDate: string;
@@ -7,7 +7,18 @@ export interface PersonalInfo {
   phoneNumber: string;
 }
 
-export interface PaymentInfo {
+export class PersonalInfo implements IPersonalInfo {
+  constructor(
+    public firstName: string = "",
+    public lastName: string = "",
+    public birthDate: string = "",
+    public email: string = "",
+    public drivingLicenseId: string = "",
+    public phoneNumber: string = ""
+  ) {}
+}
+
+export interface IPaymentInfo {
   cardProvider: "MasterCard" | "Visa" | "Bitcoin";
   name: string;
   cardNumber: string;
@@ -15,39 +26,41 @@ export interface PaymentInfo {
   exp: string;
 }
 
-export interface RentEssentials {
+export interface IRentEssentials {
   location: string;
   startDate: string;
 
   endDate: string;
 }
 
-export interface BookingDetails extends RentEssentials {
+export interface IBookingDetails extends IRentEssentials {
   dropOffLocation: string;
 }
 
-export interface RentOptions {
+export interface IRentOptions {
   price: number;
   mileage: number;
 }
 
-export interface BookingProcessDetails {
+export interface IBookingProcessDetails {
   dropOffLocation: string;
   isComplete: boolean;
 }
 
 export interface InitialState
-  extends PersonalInfo,
-    PaymentInfo,
-    RentEssentials,
-    RentOptions,
-    BookingProcessDetails {}
+  extends IPersonalInfo,
+    IPaymentInfo,
+    IRentEssentials,
+    IRentOptions,
+    IBookingProcessDetails {
+  pricePerDay: number;
+}
 
-export interface FormInitialState
-  extends PersonalInfo,
-    PaymentInfo,
-    RentOptions,
-    BookingProcessDetails {
+export interface IFormInitialState
+  extends IPersonalInfo,
+    IPaymentInfo,
+    IRentOptions,
+    IBookingProcessDetails {
   location: string;
   startDate: Date;
   endDate: Date;

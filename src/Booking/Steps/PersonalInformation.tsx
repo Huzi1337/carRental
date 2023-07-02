@@ -1,27 +1,29 @@
 import { UseFormReturnType } from "@mantine/form";
+import { TextInput } from "@mantine/core";
+
+import { IFormInitialState } from "../../redux/reducers/bookingTypes";
+import { transformLabel } from "../../utils/transformLabel";
+import { PersonalInfo } from "../../redux/reducers/bookingTypes";
+
 import "./PersonalInformation.scss";
-import { FormInitialState } from "../../redux/reducers/bookingTypes";
+
+const personalInfoInstance = new PersonalInfo();
 
 const PersonalInformation = ({
   form,
 }: {
-  form: UseFormReturnType<FormInitialState>;
+  form: UseFormReturnType<IFormInitialState>;
 }) => {
   return (
     <>
       <hr></hr>
-      <label>First Name</label>
-      <input {...form.getInputProps("firstName")} />
-      <label>Last Name</label>
-      <input {...form.getInputProps("lastName")} />
-      <label>Birth Date</label>
-      <input required />
-      <label>Email</label>
-      <input required />
-      <label>Driving License ID</label>
-      <input required />
-      <label>Phone Number</label>
-      <input required />
+      {Object.keys(personalInfoInstance).map((key) => (
+        <TextInput
+          key={key}
+          label={transformLabel(key)}
+          {...form.getInputProps(key)}
+        ></TextInput>
+      ))}
       <hr></hr>
       <p className="contractNotice">
         Please note you must be able to present a valid driving license in order

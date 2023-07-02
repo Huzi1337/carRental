@@ -5,12 +5,12 @@ import Card from "../../ReusableComponents/Card";
 import { Slider } from "@mantine/core";
 
 import "./Personalize.scss";
-import { FormInitialState } from "../../redux/reducers/bookingTypes";
+import { IFormInitialState } from "../../redux/reducers/bookingTypes";
 
 const Personalize = ({
   form,
 }: {
-  form: UseFormReturnType<FormInitialState>;
+  form: UseFormReturnType<IFormInitialState>;
 }) => {
   return (
     <>

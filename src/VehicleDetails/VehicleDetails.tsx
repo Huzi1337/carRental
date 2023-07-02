@@ -15,7 +15,9 @@ import Button from "../ReusableComponents/Button";
 import { API_URL } from "../assets/data/urls";
 import { Car } from "../assets/data/types";
 import { RootState } from "../redux/store";
-import { setRentState } from "../redux/reducers/bookingSlice";
+import { setPricePerDay, setRentState } from "../redux/reducers/bookingSlice";
+
+import { calculateRentCost } from "../utils/calculateRentCost";
 
 import dayjs from "dayjs";
 
@@ -48,7 +50,10 @@ const VehicleDetails = () => {
     params.vehicleId
       ? fetch(`${API_URL}/carRental/Cars/${Number(params.vehicleId) - 1}.json`)
           .then((res) => res.json())
-          .then((data) => setCar(data))
+          .then((data: Car) => {
+            dispatch(setPricePerDay(data.price));
+            return setCar(data);
+          })
       : null;
   }, []);
   if (!car) return <h1>Loading...</h1>;
@@ -111,8 +116,15 @@ const VehicleDetails = () => {
                   valueFormat="ddd DD MMM, YYYY hh:mm a"
                 />
               </div>
-              <h2>$420</h2>
-              <span>$69 per 24h</span>
+              <h2>
+                $
+                {calculateRentCost(
+                  form.values.startDate,
+                  form.values.endDate,
+                  car.price
+                )}
+              </h2>
+              <span>${car.price} per 24h</span>
               <Button
                 onClick={() => bookButtonHandler(form)}
                 className="btn__details"

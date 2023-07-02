@@ -1,15 +1,30 @@
 import "./FormProgress.scss";
 
-const FormProgress = () => {
+const steps = ["Date", "Personalize", "Personal Info", "Payment"];
+
+interface Props {
+  currentStep: number;
+  numberOfSteps: number;
+}
+
+const FormProgress = ({ currentStep, numberOfSteps }: Props) => {
   return (
     <div className="progressBar">
-      <span className="currentStep">Date</span>
-      <div className="line" />
-      <span>Personalize</span>
-      <div className="line" />
-      <span>Personal Info</span>
-      <div className="line" />
-      <span>Payment</span>
+      {steps.map((step, key) => {
+        return (
+          <>
+            <span
+              key={step}
+              className={currentStep === key ? "currentStep" : ""}
+            >
+              {step}
+            </span>
+            {key === numberOfSteps - 1 ? null : (
+              <div key={key} className="line" />
+            )}
+          </>
+        );
+      })}
     </div>
   );
 };
