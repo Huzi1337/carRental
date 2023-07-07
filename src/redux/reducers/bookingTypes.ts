@@ -26,11 +26,13 @@ export interface IPaymentInfo {
   exp: string;
 }
 
-export interface IRentEssentials {
-  location: string;
+export interface IRentDate {
   startDate: string;
-
   endDate: string;
+}
+
+export interface IRentEssentials extends IRentDate {
+  location: string;
 }
 
 export interface IBookingDetails extends IRentEssentials {

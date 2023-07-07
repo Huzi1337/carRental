@@ -29,8 +29,8 @@
   .container__horizontal {
     position: relative;
     width: 100%;
-    margin-top: 30px;
-    margin-bottom: 18px;
+    margin: 30px 0;
+
     display: flex;
     justify-content: space-between;
   }
@@ -66,6 +66,24 @@
       h6 {
         font-size: font.$text;
       }
+    }
+  }
+}
+
+@media (max-width: 660px) {
+  .section.location {
+    .container__horizontal {
+      flex-direction: column;
+      gap: 30px;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .section.location {
+    h5 {
+      font-size: font.$header6;
+      font-weight: bold;
     }
   }
 }

@@ -16,7 +16,7 @@
   }
 }
 
-@media (max-width: 460px) {
+@media (max-width: 768px) {
   .section.home {
     .textBox {
       padding: 0 10px;
@@ -27,6 +27,17 @@
     }
     h2 {
       font-size: font.$header3;
+    }
+  }
+}
+
+@media (max-width: 530px) {
+  .section.home {
+    h1 {
+      font-size: 23px;
+    }
+    h2 {
+      font-size: font.$header5;
     }
   }
 }

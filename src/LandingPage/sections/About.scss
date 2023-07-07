@@ -38,7 +38,6 @@
   }
 
   .newsletter {
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,7 +45,7 @@
 
     h3 {
       color: colors.$darkBlue;
-      margin-bottom: 28px;
+      margin: 28px 0;
     }
     button {
       width: 220px;
@@ -73,11 +72,16 @@
     h1 {
       font-size: font.$header2;
     }
+
     h4 {
       font-size: font.$header5;
     }
     .brandStory {
       padding: 5%;
+    }
+
+    h3 {
+      font-size: font.$header4;
     }
   }
 }

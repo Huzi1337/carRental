@@ -4,14 +4,16 @@
 .searchBar {
   width: 80%;
   max-width: 900px;
-  padding: 0 10px;
   height: 90px;
+  padding: 5px 10px;
+
   display: flex;
+  gap: 10px;
   background-color: colors.$accent;
   margin-bottom: 122px;
   margin-left: 10vw;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
   input {
     flex-direction: column-reverse;
   }
@@ -28,9 +30,14 @@
   }
 }
 
-@media (max-width: 460px) {
+@media (max-width: 768px) {
   .searchBar {
-    width: 100%;
+    gap: 7px;
+    flex-direction: column;
+    height: auto;
+    width: auto;
     margin-left: 0;
+    padding: 0 10px 5px;
+    border-radius: 5px;
   }
 }

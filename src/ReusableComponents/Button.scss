@@ -78,7 +78,13 @@
 .btn__searchBar {
   background-color: colors.$darkBlue;
   color: colors.$white;
-  height: auto;
-  align-self: stretch;
-  margin: 15px 0;
+  height: 50px;
+  align-self: center;
+  margin: 5px 0 0 0;
+}
+
+@media (max-width: 768px) {
+  .btn__searchBar {
+    margin: 0;
+  }
 }

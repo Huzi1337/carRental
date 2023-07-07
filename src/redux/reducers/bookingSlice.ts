@@ -7,6 +7,7 @@ import {
   IPaymentInfo,
   IBookingDetails,
   IRentOptions,
+  IRentDate,
 } from "./bookingTypes";
 
 const INITIAL_STATE: InitialState = {
@@ -47,6 +48,7 @@ const bookingSlice = createSlice({
         | IRentOptions
         | IPersonalInfo
         | IPaymentInfo
+        | IRentDate
       >
     ) => {
       return { ...state, ...action.payload };

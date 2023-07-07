@@ -69,16 +69,24 @@ const SearchBar = () => {
         {...form.getInputProps("location")}
         styles={() => ({ label: { color: "#f2f8fc" } })}
       ></TextInput>
+
       <DateTimePicker
         label="Start Date and Time"
         {...form.getInputProps("startDate")}
-        styles={() => ({ label: { color: "#f2f8fc" } })}
+        styles={() => ({
+          label: { color: "#f2f8fc" },
+          root: { width: "100%", maxWidth: "200px" },
+        })}
       ></DateTimePicker>
       <DateTimePicker
         label="End Date and Time"
         {...form.getInputProps("endDate")}
-        styles={() => ({ label: { color: "#f2f8fc" } })}
+        styles={() => ({
+          label: { color: "#f2f8fc" },
+          root: { width: "100%", maxWidth: "200px" },
+        })}
       ></DateTimePicker>
+
       <Button
         className="btn__searchBar"
         onClick={() => handleSearchSubmit(form)}

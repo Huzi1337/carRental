@@ -14,7 +14,6 @@ const router = createBrowserRouter([
       {
         path: "/vehicles/:vehicleId",
         element: <VehicleDetails></VehicleDetails>,
-        errorElement: <div>Nie ma czasu :D</div>,
       },
       { path: "/booking/:vehicleId", element: <Booking></Booking> },
       { path: "/vehicles", element: <VehiclePage></VehiclePage> },
