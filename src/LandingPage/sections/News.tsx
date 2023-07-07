@@ -7,7 +7,7 @@ import "./News.scss";
 
 export const News = () => {
   const imageSliderPath = "/newCars";
-  const imageHeadlinePath = "src/assets/newsHeadline";
+  const imageHeadlinePath = "/newsPosts";
   const imageCount = 4;
 
   return (
