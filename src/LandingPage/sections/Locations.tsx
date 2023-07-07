@@ -12,7 +12,7 @@ export const Locations = () => {
         <div className="container__horizontal">
           {locationHeadline.map(({ iconPath, title, subTitle }, index) => (
             <div key={index} className="container__vertical">
-              <img src={iconPath} width="30px" height="30px"></img>
+              <img src={iconPath} className="location__image"></img>
               <h3>{title}</h3>
               <h6>{subTitle}</h6>
             </div>

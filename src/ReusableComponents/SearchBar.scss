@@ -3,14 +3,15 @@
 
 .searchBar {
   width: 80%;
-  max-width: 1260px;
+  max-width: 900px;
+  padding: 0 10px;
   height: 90px;
   display: flex;
-  padding: 18px;
-  gap: 10px;
   background-color: colors.$accent;
   margin-bottom: 122px;
-
+  margin-left: 10vw;
+  justify-content: space-around;
+  align-items: center;
   input {
     flex-direction: column-reverse;
   }
@@ -24,5 +25,12 @@
     top: -15px;
     color: colors.$accent3;
     font-size: font.$textDesc;
+  }
+}
+
+@media (max-width: 460px) {
+  .searchBar {
+    width: 100%;
+    margin-left: 0;
   }
 }

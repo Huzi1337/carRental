@@ -2,8 +2,9 @@
 @use "/src/assets/font";
 
 .section.news {
-  padding-top: 17px;
-  overflow: hidden;
+  padding: 17px 0;
+
+  overflow-x: hidden;
 
   .container__horizontal {
     position: relative;
@@ -11,6 +12,13 @@
     margin-top: 60px;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 20px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .section.news {
+    height: auto;
   }
 }

@@ -10,7 +10,8 @@ interface Props {
     | "btn__back"
     | "btn__details"
     | "btn__outline"
-    | "btn__outline fill";
+    | "btn__outline fill"
+    | "btn__searchBar";
   children?: React.ReactNode;
 }
 

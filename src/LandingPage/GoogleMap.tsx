@@ -1,5 +1,7 @@
 import React, { useRef, useEffect } from "react";
 
+import "./GoogleMap.scss";
+
 interface City {
   name: string;
   lat: number;
@@ -60,7 +62,13 @@ const GoogleMap: React.FC = () => {
     };
   }, []);
 
-  return <div ref={mapRef} style={{ width: "100%", height: "50%" }}></div>;
+  return (
+    <div
+      ref={mapRef}
+      className="locations__googleMap"
+      style={{ overflow: "auto" }}
+    ></div>
+  );
 };
 
 export default GoogleMap;

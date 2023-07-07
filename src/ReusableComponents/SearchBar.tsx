@@ -10,6 +10,7 @@ import { RootState } from "../redux/store";
 
 import "./SearchBar.scss";
 import { UseFormReturnType } from "@mantine/form/lib/types";
+import Button from "./Button";
 
 interface SearchBarValues {
   location: string;
@@ -46,15 +47,19 @@ const SearchBar = () => {
     SearchBarValues,
     (values: SearchBarValues) => SearchBarValues
   >) => {
+    form.validate();
     console.log("Handle submit:", { location, startDate, endDate });
-    dispatch(
-      setRentState({
-        location,
-        startDate: dayjs(startDate).toISOString(),
-        endDate: dayjs(endDate).toISOString(),
-      })
-    );
-    navigate("/vehicles");
+    console.log("Form is valid", form.isValid());
+    if (form.isValid()) {
+      dispatch(
+        setRentState({
+          location,
+          startDate: dayjs(startDate).toISOString(),
+          endDate: dayjs(endDate).toISOString(),
+        })
+      );
+      navigate("/vehicles");
+    }
   };
 
   return (
@@ -62,18 +67,25 @@ const SearchBar = () => {
       <TextInput
         label="Location"
         {...form.getInputProps("location")}
+        styles={() => ({ label: { color: "#f2f8fc" } })}
       ></TextInput>
       <DateTimePicker
         label="Start Date and Time"
         {...form.getInputProps("startDate")}
+        styles={() => ({ label: { color: "#f2f8fc" } })}
       ></DateTimePicker>
       <DateTimePicker
         label="End Date and Time"
         {...form.getInputProps("endDate")}
+        styles={() => ({ label: { color: "#f2f8fc" } })}
       ></DateTimePicker>
-      <button onClick={() => handleSearchSubmit(form)} type="submit">
-        Bigass
-      </button>
+      <Button
+        className="btn__searchBar"
+        onClick={() => handleSearchSubmit(form)}
+        submit={true}
+      >
+        Search
+      </Button>
     </div>
   );
 };

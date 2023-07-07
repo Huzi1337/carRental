@@ -74,3 +74,11 @@
   color: colors.$white;
   border: none;
 }
+
+.btn__searchBar {
+  background-color: colors.$darkBlue;
+  color: colors.$white;
+  height: auto;
+  align-self: stretch;
+  margin: 15px 0;
+}

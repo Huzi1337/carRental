@@ -1,116 +1,111 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link as ScrollLink } from "react-scroll";
+import { transformLabel } from "../utils/transformLabel";
 
 import "./Navbar.scss";
+
+const sections = ["home", "news", "locations", "vehicles", "about", "contact"];
 
 function Navbar() {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [IsMobile, setIsMobile] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const menuClickHandler = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const labels = useMemo(
+    () => sections.map((user) => transformLabel(user)),
+    []
+  );
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
+      const currentScrollPos = window.scrollY;
       setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
       setPrevScrollPos(currentScrollPos);
     };
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      console.log("Handle resize.");
+    };
+    console.log(IsMobile);
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
     };
   }, [prevScrollPos, visible]);
 
-  return (
+  return !IsMobile ? (
     <header className={visible ? "navbar" : "navbar hide"}>
       <img src="/logo.svg"></img>
       <nav className="sections">
-        <a href="#home">
+        {sections.map((section, key) => (
           <ScrollLink
             activeClass="active"
-            to="#home"
+            to={`#${section}`}
             spy={true}
             smooth={true}
-            offset={-70}
+            offset={10}
             duration={500}
+            key={key}
           >
-            Home
+            {" "}
+            {labels[key]}
           </ScrollLink>
-        </a>
-
-        <a href="#news">
-          <ScrollLink
-            activeClass="active"
-            to="#news"
-            spy={true}
-            smooth={true}
-            offset={-70}
-            duration={500}
-          >
-            News
-          </ScrollLink>
-        </a>
-
-        <a href="#">
-          {" "}
-          <ScrollLink
-            activeClass="active"
-            to="#locations"
-            spy={true}
-            smooth={true}
-            offset={-70}
-            duration={500}
-          >
-            Locations
-          </ScrollLink>
-        </a>
-
-        <a href="#">
-          <ScrollLink
-            activeClass="active"
-            to="#vehicles"
-            spy={true}
-            smooth={true}
-            offset={-70}
-            duration={500}
-          >
-            Vehicles
-          </ScrollLink>
-        </a>
-
-        <a href="#">
-          <ScrollLink
-            activeClass="active"
-            to="#about"
-            spy={true}
-            smooth={true}
-            offset={-70}
-            duration={500}
-          >
-            About
-          </ScrollLink>
-        </a>
-
-        <a href="#">
-          <ScrollLink
-            activeClass="active"
-            to="#contact"
-            spy={true}
-            smooth={true}
-            offset={-70}
-            duration={500}
-          >
-            Contact
-          </ScrollLink>
-        </a>
+        ))}
       </nav>
 
-      <nav>
-        <a href="#home">Sign in</a>
+      <nav className="options">
+        <a href="#">Sign in</a>
 
         <a href="#">Log in</a>
 
         <a href="#">PL/EN</a>
       </nav>
+    </header>
+  ) : (
+    <header className={"navbar_mobile"}>
+      <img src="/logo.svg"></img>
+      <button
+        className={
+          menuOpen ? "navbar__menuButton active" : "navbar__menuButton"
+        }
+        onClick={menuClickHandler}
+      ></button>
+      {menuOpen && (
+        <nav className="navbar__dropDown">
+          {sections.map((section, key) => (
+            <ScrollLink
+              activeClass="active"
+              to={`#${section}`}
+              spy={true}
+              smooth={true}
+              offset={-70}
+              duration={500}
+              key={key}
+            >
+              {" "}
+              {labels[key]}
+            </ScrollLink>
+          ))}
+          <hr />
+          <a href="#">Sign in</a>
+
+          <a href="#">Log in</a>
+
+          <a href="#">PL/EN</a>
+        </nav>
+      )}
     </header>
   );
 }

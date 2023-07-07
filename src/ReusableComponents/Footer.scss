@@ -6,6 +6,7 @@
   height: 130px;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   padding: 30px;
   font-size: font.$text;
   color: colors.$strongGray;
@@ -13,7 +14,7 @@
 
   .logo {
     margin-right: auto;
-    width: auto;
+    height: 30px;
   }
   nav {
     flex-direction: column;
@@ -42,6 +43,12 @@
     background-color: transparent;
     border: none;
     border-radius: 0;
+  }
+
+  .twitter,
+  .instagram,
+  .facebook {
+    margin: 38px 15px 20px 20px;
   }
 
   .twitter {

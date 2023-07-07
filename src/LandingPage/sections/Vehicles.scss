@@ -37,3 +37,21 @@
     }
   }
 }
+
+@media (max-width: 1200px) {
+  .section.vehicles {
+    height: auto;
+    .cars__gridContainer {
+      grid-template-columns: repeat(2, 280px);
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .section.vehicles {
+    height: auto;
+    .cars__gridContainer {
+      grid-template-columns: 280px;
+    }
+  }
+}
