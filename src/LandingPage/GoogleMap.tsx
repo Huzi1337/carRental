@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 import "./GoogleMap.scss";
 
@@ -19,48 +19,73 @@ const cities: City[] = [
 
 const GoogleMap: React.FC = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
-  const markersRef = useRef<globalThis.google.maps.Marker[]>([]);
-  const mapInstanceRef = useRef<globalThis.google.maps.Map | null>(null);
+  const markersRef = useRef<google.maps.Marker[]>([]);
+  const mapInstanceRef = useRef<google.maps.Map | null>(null);
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   useEffect(() => {
-    const mapOptions: globalThis.google.maps.MapOptions = {
-      center: { lat: 51.9194, lng: 19.1451 }, // Center of Poland
-      zoom: 6,
-      disableDefaultUI: true,
+    const loadMapScript = () => {
+      const script = document.createElement("script");
+      script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBoM2bSm8V4Fj1Mj2YSradgmcPIL7jUD6U&callback=initMap`;
+      script.defer = true;
+      script.async = true;
+      script.addEventListener("load", handleScriptLoad);
+      document.body.appendChild(script);
     };
 
-    const map = new window.google.maps.Map(mapRef.current!, mapOptions);
-    mapInstanceRef.current = map;
+    const handleScriptLoad = () => {
+      setMapLoaded(true);
+    };
 
-    const markers = cities.map((city) => {
-      const markerIcon = {
-        url: "https://maps.google.com/mapfiles/ms/icons/blue.png", // URL of the default pin icon
-        scaledSize: new window.google.maps.Size(32, 32), // Set the desired size of the marker icon
-        fillColor: "blue", // Change the marker color here
+    if (!window.google || !window.google.maps) {
+      (window as any).initMap = handleScriptLoad;
+      loadMapScript();
+    } else {
+      setMapLoaded(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (mapLoaded) {
+      const mapOptions: google.maps.MapOptions = {
+        center: { lat: 51.9194, lng: 19.1451 },
+        zoom: 6,
+        disableDefaultUI: true,
       };
 
-      const marker = new window.google.maps.Marker({
-        position: { lat: city.lat, lng: city.lng },
-        title: city.name,
-        map: map,
-        icon: markerIcon,
+      const map = new google.maps.Map(mapRef.current!, mapOptions);
+      mapInstanceRef.current = map;
+
+      const markers = cities.map((city) => {
+        const markerIcon = {
+          url: "https://maps.google.com/mapfiles/ms/icons/blue.png",
+          scaledSize: new google.maps.Size(32, 32),
+          fillColor: "blue",
+        };
+
+        const marker = new google.maps.Marker({
+          position: { lat: city.lat, lng: city.lng },
+          title: city.name,
+          map: map,
+          icon: markerIcon,
+        });
+        return marker;
       });
-      return marker;
-    });
 
-    markersRef.current = markers;
+      markersRef.current = markers;
 
-    return () => {
-      markersRef.current.forEach((marker) => {
-        marker.setMap(null);
-      });
-      markersRef.current = [];
+      return () => {
+        markersRef.current.forEach((marker) => {
+          marker.setMap(null);
+        });
+        markersRef.current = [];
 
-      if (mapInstanceRef.current) {
-        mapInstanceRef.current = null;
-      }
-    };
-  }, []);
+        if (mapInstanceRef.current) {
+          mapInstanceRef.current = null;
+        }
+      };
+    }
+  }, [mapLoaded]);
 
   return (
     <div

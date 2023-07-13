@@ -47,17 +47,11 @@ const Date = ({ form, pricePerDay, rentCost }: Props) => {
       <div className="booking__row date">
         <div className="booking__col">
           <label>Pick-up Date and Time</label>
-          <div>
-            <div className="rentStartArrow"></div>
-            <DateTimePicker {...form.getInputProps("startDate")} />
-          </div>
+          <DateTimePicker {...form.getInputProps("startDate")} />
         </div>
         <div className="booking__col">
           <label>Drop-off Date and Time</label>
-          <DateTimePicker
-            icon={<div className="rentEndArrow"></div>}
-            {...form.getInputProps("endDate")}
-          />
+          <DateTimePicker {...form.getInputProps("endDate")} />
         </div>
       </div>
       <hr></hr>
