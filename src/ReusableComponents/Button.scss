@@ -43,9 +43,10 @@
 
 .btn__back {
   position: absolute;
+
   left: 0px;
   top: -33px;
-  width: 65px;
+  width: auto;
   height: 20px;
   font-size: font.$header5;
   color: colors.$lightGray;

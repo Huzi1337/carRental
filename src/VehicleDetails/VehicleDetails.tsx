@@ -107,11 +107,13 @@ const VehicleDetails = () => {
                   {...form.getInputProps("startDate")}
                   variant="unstyled"
                   valueFormat="ddd DD MMM, YYYY hh:mm a"
+                  icon={<div className="rentStartArrow"></div>}
                 />
                 <DateTimePicker
                   {...form.getInputProps("endDate")}
                   variant="unstyled"
                   valueFormat="ddd DD MMM, YYYY hh:mm a"
+                  icon={<div className="rentEndArrow"></div>}
                 />
               </div>
               <h2>

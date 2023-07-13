@@ -34,23 +34,30 @@ const Date = ({ form, pricePerDay, rentCost }: Props) => {
           ></TextInput>
         </>
       )}
+
       <p className="booking__diff__location">
         <Checkbox
+          label="Return at different location"
           checked={isDifferentDropOffLocation}
           onChange={(event) =>
             setIsDifferentDropOffLocation(event.currentTarget.checked)
           }
         ></Checkbox>
-        <span>Return at different location</span>
       </p>
       <div className="booking__row date">
         <div className="booking__col">
           <label>Pick-up Date and Time</label>
-          <DateTimePicker {...form.getInputProps("startDate")} />
+          <div>
+            <div className="rentStartArrow"></div>
+            <DateTimePicker {...form.getInputProps("startDate")} />
+          </div>
         </div>
         <div className="booking__col">
           <label>Drop-off Date and Time</label>
-          <DateTimePicker {...form.getInputProps("endDate")} />
+          <DateTimePicker
+            icon={<div className="rentEndArrow"></div>}
+            {...form.getInputProps("endDate")}
+          />
         </div>
       </div>
       <hr></hr>

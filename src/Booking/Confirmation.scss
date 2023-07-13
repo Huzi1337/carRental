@@ -2,7 +2,8 @@
 @use "/src/assets/font";
 
 .confirmation__container {
-  width: 700px;
+  width: 100%;
+  max-width: 700px;
   height: 100%;
   align-self: center;
   align-items: center;

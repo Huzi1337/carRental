@@ -67,13 +67,20 @@
     gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
+    padding: 30px 5%;
     .logo {
       margin: 0 0 0 25px;
       height: 40px;
     }
     nav {
       flex-direction: row;
+      justify-content: center;
       gap: 10px;
+      width: 75%;
+    }
+    address {
+      width: 40%;
+      justify-content: center;
     }
 
     .footer__socialMedia {

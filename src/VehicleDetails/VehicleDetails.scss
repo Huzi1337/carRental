@@ -43,11 +43,28 @@
 }
 
 .details__date {
-  width: 220px;
+  width: 230px;
   height: 70px;
   padding: 11px;
   background-color: colors.$white;
   border-radius: 4px;
+}
+
+.rentStartArrow,
+.rentEndArrow {
+  margin-top: 5px;
+  width: 16px;
+  height: 16px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.rentStartArrow {
+  background-image: url(/icons/rentStartArrow.svg);
+}
+
+.rentEndArrow {
+  background-image: url(/icons/rentEndArrow.svg);
 }
 
 @media (max-width: 768px) {

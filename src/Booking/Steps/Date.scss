@@ -7,11 +7,6 @@
     display: flex;
     margin-bottom: 40px;
 
-    input {
-      width: 20px;
-      height: 20px;
-      margin-right: 23px;
-    }
     span {
       align-self: center;
     }
@@ -26,6 +21,9 @@
     height: 36px;
 
     margin-bottom: 11px;
+  }
+  .booking__row.date {
+    gap: 80px;
   }
 }
 
@@ -56,8 +54,9 @@
     .booking__input__date {
       width: 100%;
     }
-  }
-  .booking__row.date {
-    justify-content: space-between;
+    .booking__row.date {
+      gap: 0;
+      justify-content: space-between;
+    }
   }
 }
