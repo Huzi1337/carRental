@@ -33,6 +33,7 @@
     border-radius: 4px 4px 0 0;
   }
   .tint {
+    top: 0;
     position: absolute;
     background: linear-gradient(
       360deg,
@@ -40,13 +41,18 @@
       rgba(217, 217, 217, 0) 100%
     );
   }
+  .imgContainer__card {
+    position: relative;
+    width: 100%;
+    height: 50%;
+  }
 }
 
 .card__details,
 .card__booking {
   height: 700px;
   background-color: colors.$whitest;
-  width: 65%;
+  width: 100%;
   border: 2px solid colors.$white;
   box-shadow: 0px 4px 8px rgba(98, 107, 125, 0.2);
   max-width: 1200px;
@@ -56,9 +62,10 @@
   img,
   .tint {
     width: 100%;
-    height: 50%;
+    height: 100%;
   }
   .tint {
+    top: -5px;
     position: absolute;
     background: linear-gradient(
       360deg,
@@ -66,6 +73,11 @@
       rgba(100, 115, 175, 0.105938) 41.15%,
       rgba(217, 217, 217, 0) 100%
     );
+  }
+  .imgContainer__card {
+    position: relative;
+    width: 100%;
+    height: 50%;
   }
 }
 
@@ -78,7 +90,6 @@
 }
 
 .card__summary {
-  width: 100%;
   height: auto;
   padding: 1.5rem 0.5rem;
   border-color: colors.$accent;
@@ -94,8 +105,8 @@
 }
 
 .card__insurance {
-  width: 600px;
-  height: 90px;
+  width: 100%;
+
   padding: 20px 30px;
   margin-top: 20px;
   background-color: colors.$lightGray;
@@ -122,5 +133,43 @@
   .insurance__desc {
     font-size: 10px;
     margin: 6px 0 0;
+  }
+}
+
+@media (max-width: 890px) {
+  .card__insurance {
+    padding: 20px 10px;
+    .insurance__content {
+      h5 {
+        font-size: font.$header6;
+      }
+    }
+    .insurance__row {
+      gap: 5px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .card__details,
+  .card__booking {
+    height: auto;
+    padding-bottom: 20px;
+  }
+
+  .card__booking {
+    padding: 20px 20%;
+  }
+}
+
+@media (max-width: 490px) {
+  .card__booking {
+    padding: 20px 5%;
+  }
+}
+
+@media (max-width: 330px) {
+  .card__booking {
+    padding: 20px 2%;
   }
 }

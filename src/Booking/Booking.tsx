@@ -1,5 +1,5 @@
 import Footer from "../ReusableComponents/Footer";
-import Navbar from "../ReusableComponents/Navbar";
+
 import Card from "../ReusableComponents/Card";
 import Container from "../ReusableComponents/Container";
 import RentForm from "./RentForm";
@@ -15,7 +15,6 @@ const Booking = () => {
   return (
     <>
       <Container className="container__booking">
-        <Navbar></Navbar>
         <Card className="card__booking" tint={false}>
           {!isComplete ? <RentForm initialValues={store} /> : <Confirmation />}
         </Card>

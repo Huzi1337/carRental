@@ -11,7 +11,7 @@
   height: 50%;
   width: 100%;
   padding: 32px 44px 48px;
-  gap: 30px;
+  gap: 20px;
 }
 
 .details__col {
@@ -38,12 +38,7 @@
   gap: 90px;
 }
 
-.large {
-  width: 75%;
-}
-
 .small {
-  width: 25%;
   align-items: flex-end;
 }
 
@@ -53,4 +48,32 @@
   padding: 11px;
   background-color: colors.$white;
   border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .details__info {
+    padding: 2%;
+    flex-direction: column;
+  }
+  .details__col {
+    h3 {
+      text-align: center;
+      font-size: font.$header4;
+    }
+    h6 {
+      font-size: font.$text;
+    }
+  }
+  .details__carDesc {
+    font-size: font.$text;
+  }
+  .small {
+    min-width: 30%;
+    align-items: center;
+  }
+  .details__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 0;
+  }
 }

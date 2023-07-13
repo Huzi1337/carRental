@@ -2,10 +2,6 @@
 @use "/src/assets/font";
 
 .booking__col {
-  input {
-    width: 360px;
-    margin-bottom: 5px;
-  }
   .contractNotice {
     font-size: font.$textDesc;
     color: colors.$strongGray;

@@ -8,7 +8,7 @@ interface Props {
 
 const IconListItem = ({ iconClass, children, contentClass }: Props) => {
   return (
-    <div className="container">
+    <div className="iconListItem__container">
       <div className={`icon ${iconClass}`} />
       <p className={`content ${contentClass}`}>{children}</p>
     </div>

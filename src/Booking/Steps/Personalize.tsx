@@ -1,17 +1,38 @@
 import { UseFormReturnType } from "@mantine/form";
 import Button from "../../ReusableComponents/Button";
-import Card from "../../ReusableComponents/Card";
+
+import { useState } from "react";
 
 import { Slider } from "@mantine/core";
 
-import "./Personalize.scss";
 import { IFormInitialState } from "../../redux/reducers/bookingTypes";
+import InsuranceCard from "./Personalize/InsuranceCard";
+
+import "./Personalize.scss";
+
+const INSURANCE = [
+  {
+    name: "Unlimited liability",
+    cost: "Free",
+    description: "You will be fully liable for theft or damage to the vehicle.",
+  },
+  {
+    name: "$8000 excess",
+    cost: "$80/day",
+    description: "You will be only liable for theft or damage up to $8000.",
+  },
+];
 
 const Personalize = ({
   form,
 }: {
   form: UseFormReturnType<IFormInitialState>;
 }) => {
+  const [selectedInsurance, setSelectedInsurance] = useState(0);
+
+  const insuranceSelectHandler = (index: number) => {
+    setSelectedInsurance(index);
+  };
   return (
     <>
       <hr></hr>
@@ -32,38 +53,15 @@ const Personalize = ({
       <p className="insurance__subtitle">
         Ensure your safety and choose the options that best fits you.
       </p>
-      <Card className="card__insurance" tint={false}>
-        <div className="insurance__content">
-          <div className="insurance__row">
-            <h5>Unlimited liability</h5>
-            <h5>Free</h5>
-          </div>
-          <p className="insurance__desc">
-            You will be fully liable for theft or damage to the vehicle.
-          </p>
-        </div>
-        <div className="insurance__btn__wrapper">
-          <Button onClick={() => {}} className="btn__outline">
-            Select
-          </Button>
-        </div>
-      </Card>
-      <Card className="card__insurance" tint={false}>
-        <div className="insurance__content">
-          <div className="insurance__row">
-            <h5>$8000 excess</h5>
-            <h5>$80 / day</h5>
-          </div>
-          <p className="insurance__desc">
-            You will be fully liable for theft or damage to the vehicle.
-          </p>
-        </div>
-        <div className="insurance__btn__wrapper">
-          <Button onClick={() => {}} className="btn__outline fill">
-            Select
-          </Button>
-        </div>
-      </Card>
+      {INSURANCE.map((option, key) => (
+        <InsuranceCard
+          insuranceName={option.name}
+          cost={option.cost}
+          description={option.description}
+          onClick={() => insuranceSelectHandler(key)}
+          selected={selectedInsurance === key}
+        ></InsuranceCard>
+      ))}
     </>
   );
 };

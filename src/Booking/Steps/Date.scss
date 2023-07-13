@@ -50,3 +50,14 @@
 .booking__col.priceValue {
   margin-left: 50px;
 }
+
+@media (max-width: 768px) {
+  .booking__col {
+    .booking__input__date {
+      width: 100%;
+    }
+  }
+  .booking__row.date {
+    justify-content: space-between;
+  }
+}

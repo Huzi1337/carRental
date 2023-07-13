@@ -1,6 +1,11 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
 .container__details,
 .container__booking {
-  padding-top: 95px;
+  padding-top: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,4 +18,12 @@
   background-image: url(/bookingbg.png),
     linear-gradient(180deg, #626b7d 0%, #122c91 96.78%);
   background-size: cover;
+}
+
+@media (max-width: 768px) {
+  .container__details,
+  .container__booking {
+    height: auto;
+    padding: 40px 0;
+  }
 }

@@ -16,8 +16,11 @@ interface Props {
 const Card = ({ src, children, className, tint }: Props) => {
   return (
     <div className={"card" + ` ${className}`}>
-      <img src={src}></img>
-      {tint ? <div className="tint"></div> : null}
+      <div className="imgContainer__card">
+        <img src={src}></img>
+        {tint ? <div className="tint"></div> : null}
+      </div>
+
       {children}
     </div>
   );

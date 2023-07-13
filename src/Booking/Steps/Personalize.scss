@@ -29,3 +29,11 @@
     margin-bottom: 20px 0 0;
   }
 }
+
+@media (max-width: 768px) {
+  .booking__col {
+    .personalize__slider__container {
+      width: 100%;
+    }
+  }
+}

@@ -43,7 +43,7 @@ const Date = ({ form, pricePerDay, rentCost }: Props) => {
         ></Checkbox>
         <span>Return at different location</span>
       </p>
-      <div className="booking__row">
+      <div className="booking__row date">
         <div className="booking__col">
           <label>Pick-up Date and Time</label>
           <DateTimePicker {...form.getInputProps("startDate")} />

@@ -15,9 +15,11 @@ const Footer = () => {
         <br />
         office@carrent.com
       </address>
-      <a href="https://twitter.com" className="twitter"></a>
-      <a href="https://instagram.com" className="instagram"></a>
-      <a href="https://facebook.com" className="facebook"></a>
+      <div className="footer__socialMedia">
+        <a href="https://twitter.com" className="twitter"></a>
+        <a href="https://instagram.com" className="instagram"></a>
+        <a href="https://facebook.com" className="facebook"></a>
+      </div>
     </div>
   );
 };

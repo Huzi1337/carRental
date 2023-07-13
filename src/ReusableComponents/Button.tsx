@@ -8,6 +8,7 @@ interface Props {
     | "btn__news"
     | "btn__form"
     | "btn__back"
+    | "btn__back strong"
     | "btn__details"
     | "btn__outline"
     | "btn__outline fill"

@@ -9,12 +9,15 @@ import {
   IRentOptions,
   IRentDate,
 } from "./bookingTypes";
+import dayjs from "dayjs";
 
 const INITIAL_STATE: InitialState = {
   location: "Ass Town",
-  startDate: "",
+  startDate: dayjs().toISOString(),
 
-  endDate: "",
+  endDate: dayjs()
+    .set("date", dayjs().date() + 1)
+    .toISOString(),
 
   dropOffLocation: "",
   mileage: 10,

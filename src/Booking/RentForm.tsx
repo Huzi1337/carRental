@@ -220,7 +220,7 @@ const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
         currentStep={currentStep}
         numberOfSteps={FORM_STEPS.length}
       />
-      <h3>
+      <h3 className="booking__stepName">
         {currentStep < FORM_STEPS.length ? FORM_STEPS[currentStep][1] : null}
       </h3>
       <div className="booking__row main">

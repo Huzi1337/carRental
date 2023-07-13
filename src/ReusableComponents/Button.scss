@@ -60,6 +60,13 @@
   }
 }
 
+.btn__back.strong {
+  color: colors.$strongGray;
+  i {
+    background-image: url(/icons/backArrowStrong.svg);
+  }
+}
+
 .btn__outline {
   height: 40px;
   padding: 5px 20px;
@@ -81,6 +88,12 @@
   height: 50px;
   align-self: center;
   margin: 5px 0 0 0;
+}
+
+@media (max-width: 890px) {
+  .btn__outline {
+    width: 100%;
+  }
 }
 
 @media (max-width: 768px) {

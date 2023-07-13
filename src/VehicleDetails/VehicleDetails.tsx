@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Navbar from "../ReusableComponents/Navbar";
 import Footer from "../ReusableComponents/Footer";
 import Card from "../ReusableComponents/Card";
 import Container from "../ReusableComponents/Container";
@@ -78,17 +77,16 @@ const VehicleDetails = () => {
   return (
     <>
       <Container className="container__details">
-        <Navbar></Navbar>
         <Card
           src="/cars/modelName/bigaCar.png"
           className="card__details"
           tint={true}
         >
-          <Button onClick={backButtonHandler} className="btn__back">
+          <Button onClick={backButtonHandler} className="btn__back strong">
             <i></i>Back
           </Button>
           <div className="details__info">
-            <div className="details__col large">
+            <div className="details__col">
               <h3>{car.modelName}</h3>
               <div className="details__row">
                 <h6>
@@ -101,7 +99,7 @@ const VehicleDetails = () => {
                   <br /> Auto segment: {car.carSegment}
                 </h6>
               </div>
-              <p>{car.desc}</p>
+              <p className="details__carDesc">{car.desc}</p>
             </div>
             <div className="details__col small">
               <div className="details__date">

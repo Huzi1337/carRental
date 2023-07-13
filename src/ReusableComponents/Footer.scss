@@ -33,31 +33,55 @@
     margin: 0 60px;
   }
 
-  .instagram,
-  .facebook,
-  .twitter {
-    width: 16px;
-    height: 16px;
-    background-repeat: no-repeat;
-    background-size: auto;
-    background-color: transparent;
-    border: none;
-    border-radius: 0;
-  }
+  .footer__socialMedia {
+    display: flex;
+    .instagram,
+    .facebook,
+    .twitter {
+      display: flex;
+      width: 16px;
+      height: 16px;
+      background-repeat: no-repeat;
+      background-size: auto;
+      background-color: transparent;
+      border: none;
+      border-radius: 0;
+      margin: 38px 15px 20px 20px;
+    }
 
-  .twitter,
-  .instagram,
-  .facebook {
-    margin: 38px 15px 20px 20px;
+    .twitter {
+      background-image: url(/socialMedia/twitter.svg);
+    }
+    .instagram {
+      background-image: url(/socialMedia/instagram.svg);
+    }
+    .facebook {
+      background-image: url(/socialMedia/facebook.svg);
+    }
   }
+}
 
-  .twitter {
-    background-image: url(/socialMedia/twitter.svg);
-  }
-  .instagram {
-    background-image: url(/socialMedia/instagram.svg);
-  }
-  .facebook {
-    background-image: url(/socialMedia/facebook.svg);
+@media (max-width: 700px) {
+  .footer {
+    height: auto;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    .logo {
+      margin: 0 0 0 25px;
+      height: 40px;
+    }
+    nav {
+      flex-direction: row;
+      gap: 10px;
+    }
+
+    .footer__socialMedia {
+      .instagram,
+      .facebook,
+      .twitter {
+        margin: 20px;
+      }
+    }
   }
 }
