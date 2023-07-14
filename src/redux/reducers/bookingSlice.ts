@@ -12,7 +12,7 @@ import {
 import dayjs from "dayjs";
 
 const INITIAL_STATE: InitialState = {
-  location: "Ass Town",
+  location: "Warsaw",
   startDate: dayjs().toISOString(),
 
   endDate: dayjs()
