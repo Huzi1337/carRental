@@ -1,4 +1,5 @@
 @use "../assets/colors";
+@use "../assets/font";
 
 .navbar,
 .navbar_mobile {
@@ -17,6 +18,10 @@
     margin-bottom: 5px;
     margin-left: 10px;
   }
+  a {
+    text-decoration: none;
+    color: colors.$darkBlue;
+  }
 }
 
 .navbar {
@@ -25,11 +30,6 @@
 
   top: 0;
   left: 0;
-
-  a {
-    text-decoration: none;
-    color: colors.$darkBlue;
-  }
 }
 
 .options {
@@ -79,6 +79,8 @@ nav.sections {
       background-image: url(/icons/hamburger_pressed.svg);
     }
     .navbar__dropDown {
+      height: 100%;
+      width: 50%;
       position: fixed;
       flex-direction: column;
       border: 1px solid colors.$lightGray;
@@ -88,9 +90,45 @@ nav.sections {
       padding: 10px;
       background-color: colors.$whitest;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      animation: slideIn 0.25s ease-in-out;
       a {
-        text-decoration: none;
+        font-size: font.$header4;
       }
     }
+    .navbar__dropDown.hide {
+      animation: slideIn 0.25 ease-in-out;
+      animation-direction: reverse;
+    }
+  }
+}
+.navbar__blinder {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.9;
+  animation: fadeIn 0.25s ease-in;
+  z-index: 1;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+    filter: blur(5px);
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.9;
   }
 }

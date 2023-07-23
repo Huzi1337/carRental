@@ -74,39 +74,44 @@ function Navbar() {
       </nav>
     </header>
   ) : (
-    <header className={"navbar_mobile"}>
-      <img src="/logo.svg"></img>
-      <button
-        className={
-          menuOpen ? "navbar__menuButton active" : "navbar__menuButton"
-        }
-        onClick={menuClickHandler}
-      ></button>
-      {menuOpen && (
-        <nav className="navbar__dropDown">
-          {sections.map((section, key) => (
-            <ScrollLink
-              activeClass="active"
-              to={`#${section}`}
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-              key={key}
-            >
-              {" "}
-              {labels[key]}
-            </ScrollLink>
-          ))}
-          <hr />
-          <a href="#">Sign in</a>
+    <>
+      {menuOpen && <div className="navbar__blinder"></div>}
+      <header className={"navbar_mobile"}>
+        <img src="/logo.svg"></img>
+        <button
+          className={
+            menuOpen ? "navbar__menuButton active" : "navbar__menuButton"
+          }
+          onClick={menuClickHandler}
+        ></button>
+        {menuOpen && (
+          <>
+            <nav className="navbar__dropDown">
+              {sections.map((section, key) => (
+                <ScrollLink
+                  activeClass="active"
+                  to={`#${section}`}
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                  key={key}
+                >
+                  {" "}
+                  {labels[key]}
+                </ScrollLink>
+              ))}
+              <hr />
+              <a href="#">Sign in</a>
 
-          <a href="#">Log in</a>
+              <a href="#">Log in</a>
 
-          <a href="#">PL/EN</a>
-        </nav>
-      )}
-    </header>
+              <a href="#">PL/EN</a>
+            </nav>
+          </>
+        )}
+      </header>
+    </>
   );
 }
 
