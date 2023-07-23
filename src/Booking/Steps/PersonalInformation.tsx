@@ -19,6 +19,7 @@ const PersonalInformation = ({
       <hr></hr>
       {Object.keys(personalInfoInstance).map((key) => (
         <TextInput
+          className="personalInformation__textInput"
           key={key}
           label={transformLabel(key)}
           {...form.getInputProps(key)}

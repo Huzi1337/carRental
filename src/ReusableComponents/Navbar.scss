@@ -21,6 +21,7 @@
   a {
     text-decoration: none;
     color: colors.$darkBlue;
+    cursor: pointer;
   }
 }
 
@@ -74,6 +75,7 @@ nav.sections {
       height: 24px;
       background-image: url(/icons/hamburger_base.svg);
       background-color: transparent;
+      cursor: pointer;
     }
     .navbar__menuButton.active {
       background-image: url(/icons/hamburger_pressed.svg);

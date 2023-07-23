@@ -28,7 +28,7 @@ const Carousel: React.FC<Props> = ({ imagePath, imageCount }) => {
       {imageUrls.map((imageUrl, index) => (
         <div className="news__imageContainer" key={index}>
           <div
-            className="news__image"
+            className={`news__image no${index + 1}`}
             style={{ backgroundImage: `url(${imageUrl})` }}
           >
             <h2>New Classics in the Offer</h2>

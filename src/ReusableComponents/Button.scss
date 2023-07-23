@@ -19,6 +19,31 @@
   font-size: font.$header6;
 }
 
+.btn__news:hover,
+.btn__cars:hover,
+.btn__searchBar:hover,
+.btn__details:hover,
+.btn__form:hover {
+  transform: scale(1.05);
+  background-color: colors.$accent;
+  color: colors.$whitest;
+  animation: enlarge 0.2s ease-in;
+  filter: drop-shadow(0 0 3px colors.$darkBlue);
+}
+
+.btn__searchBar:hover {
+  background-color: colors.$darkBlue;
+}
+
+@keyframes enlarge {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
 .btn__cars {
   margin-top: auto;
   margin-bottom: 20px;
