@@ -1,4 +1,5 @@
 @use "../assets/colors";
+@use "../assets/font";
 
 .news__image {
   width: 100%;
@@ -6,7 +7,7 @@
 
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: 20% 60%;
 
   color: colors.$white;
   padding: 5% 0 0 7.5%;
@@ -15,11 +16,16 @@
 .news__imageContainer {
   width: 100vh;
   height: 50vh;
+
+  h5 {
+    max-width: 600px;
+    width: 100%;
+  }
 }
 
 .slick-dots li button:before {
   color: colors.$white;
-  font-size: 20px;
+  font-size: 12px;
   opacity: 0.5;
 }
 .slick-dots {
@@ -29,4 +35,25 @@
 .slick-dots li.slick-active button:before {
   color: colors.$white;
   opacity: 1;
+}
+
+@media (max-width: 700px) {
+  .news__image,
+  .news__imageContainer {
+    height: 30vh;
+  }
+  .news__image {
+    padding: 5% 0 0 1rem;
+  }
+
+  .news__imageContainer {
+    text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
+      -1px -1px 0 #000;
+    h2 {
+      font-size: font.$header3;
+    }
+    h5 {
+      font-size: font.$header6;
+    }
+  }
 }

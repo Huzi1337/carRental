@@ -20,7 +20,7 @@ const Carousel: React.FC<Props> = ({ imagePath, imageCount }) => {
 
   const imageUrls = Array.from(
     { length: imageCount },
-    (_, i) => `${imagePath}/car${i + 1}.png`
+    (_, i) => `${imagePath}/car${i + 1}.jpg`
   );
 
   return (
@@ -33,9 +33,8 @@ const Carousel: React.FC<Props> = ({ imagePath, imageCount }) => {
           >
             <h2>New Classics in the Offer</h2>
             <h5>
-              Driving a vintage car is not only a reason to be proud but
-              <br />
-              also an opportunity to present a unique vehicle on the road.
+              Driving a vintage car is not only a reason to be proud but also an
+              opportunity to present a unique vehicle on the road.
             </h5>
           </div>
         </div>
