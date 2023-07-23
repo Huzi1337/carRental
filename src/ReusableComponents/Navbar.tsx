@@ -30,9 +30,7 @@ function Navbar() {
 
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
-      console.log("Handle resize.");
     };
-    console.log(IsMobile);
 
     window.addEventListener("resize", handleResize);
     handleResize();

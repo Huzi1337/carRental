@@ -12,7 +12,7 @@ const FormProgress = ({ currentStep, numberOfSteps }: Props) => {
     <div className="progressBar">
       {steps.map((step, key) => {
         return (
-          <>
+          <div key={key}>
             <span
               key={step}
               className={currentStep === key ? "currentStep" : ""}
@@ -22,7 +22,7 @@ const FormProgress = ({ currentStep, numberOfSteps }: Props) => {
             {key === numberOfSteps - 1 ? null : (
               <div key={key} className="line" />
             )}
-          </>
+          </div>
         );
       })}
     </div>

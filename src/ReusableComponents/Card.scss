@@ -50,7 +50,7 @@
 
 .card__details,
 .card__booking {
-  height: 700px;
+  min-height: 700px;
   background-color: colors.$whitest;
   width: 100%;
   border: 2px solid colors.$white;

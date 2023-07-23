@@ -25,8 +25,6 @@ const SearchBar = () => {
     (state: RootState) => state.booking
   );
 
-  console.log("global state:", location, startDate, endDate);
-
   const form = useForm<SearchBarValues>({
     initialValues: {
       location,
@@ -48,8 +46,6 @@ const SearchBar = () => {
     (values: SearchBarValues) => SearchBarValues
   >) => {
     form.validate();
-    console.log("Handle submit:", { location, startDate, endDate });
-    console.log("Form is valid", form.isValid());
     if (form.isValid()) {
       dispatch(
         setRentState({

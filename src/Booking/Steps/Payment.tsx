@@ -2,6 +2,7 @@ import { UseFormReturnType } from "@mantine/form";
 import { IFormInitialState } from "../../redux/reducers/bookingTypes";
 import "./Payment.scss";
 import { Radio, NumberInput, TextInput } from "@mantine/core";
+import { ChangeEvent, useEffect, useState } from "react";
 
 const PAYMENT_OPTIONS = ["MasterCard", "Visa", "Bitcoin"];
 
@@ -10,7 +11,65 @@ interface Props {
   rentCost: number;
 }
 
-const Payment = ({ form, rentCost }: Props) => {
+const Payment = ({
+  form,
+  form: {
+    values: { cardNumber: formCardNumber, exp },
+  },
+  rentCost,
+}: Props) => {
+  const [cardNumber, setCardNumber] = useState(
+    formCardNumber.length > 0 ? formCardNumber : ""
+  );
+  const [expirationDate, setExpirationDate] = useState(
+    exp.length > 0 ? exp : ""
+  );
+  const [cvv, setCVV] = useState("");
+  useEffect(() => {
+    form.setFieldValue("cardNumber", cardNumber);
+  }, [cardNumber]);
+  useEffect(() => {
+    form.setFieldValue("exp", expirationDate);
+  }, [expirationDate]);
+
+  useEffect(() => {
+    form.setFieldValue("cvv", cvv);
+  }, [cvv]);
+
+  const formatCardNumber = (value: string) => {
+    const sanitizedValue = value.replace(/[^\d]/g, "");
+    const groups = sanitizedValue.match(/.{1,4}/g);
+    const formattedValue = groups ? groups.join(" ") : sanitizedValue;
+    return formattedValue;
+  };
+  const formatExpirationDate = (value: string): string => {
+    const sanitizedValue = value.replace(/[^0-9]/g, "");
+    const groups = sanitizedValue.match(/.{1,2}/g);
+    const formattedValue = groups ? groups.join("/") : sanitizedValue;
+    return formattedValue;
+  };
+  const formatCVV = (value: string): string => {
+    const sanitizedValue = value.replace(/[^0-9]/g, "");
+
+    return sanitizedValue;
+  };
+
+  const handleCardNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.currentTarget;
+    const formattedValue = formatCardNumber(value);
+    setCardNumber(formattedValue);
+  };
+  const handleExpirationDateChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.currentTarget;
+    const formattedValue = formatExpirationDate(value);
+    setExpirationDate(formattedValue);
+  };
+
+  const handleCVVChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.currentTarget;
+    const formattedValue = formatCVV(value);
+    setCVV(formattedValue);
+  };
   return (
     <>
       <hr></hr>
@@ -44,20 +103,34 @@ const Payment = ({ form, rentCost }: Props) => {
         <div className="booking__row cardInfo">
           <div className="booking__col cardNo">
             <label>Credit Card Number</label>
-            <NumberInput
-              hideControls
-              maxLength={16}
-              formatter={(value) => value.replace(/(\d{4})(?=\d)/g, "$1 ")}
-            ></NumberInput>
+            <TextInput
+              {...form.getInputProps("cardNumber")}
+              onChange={handleCardNumberChange}
+              value={cardNumber}
+              placeholder="xxxx xxxx xxxx xxxx"
+              maxLength={19}
+            ></TextInput>
           </div>
           <div className="booking__col ccv">
             <label>CCV</label>
-            <NumberInput maxLength={3} hideControls></NumberInput>
+            <TextInput
+              {...form.getInputProps("cvv")}
+              onChange={handleCVVChange}
+              value={cvv}
+              maxLength={3}
+              placeholder="xxx"
+            ></TextInput>
           </div>
         </div>
         <div className="booking__col expDate">
           <label>Expiration Date</label>
-          <input></input>
+          <TextInput
+            {...form.getInputProps("exp")}
+            onChange={handleExpirationDateChange}
+            value={expirationDate}
+            maxLength={5}
+            placeholder="xx / xx"
+          ></TextInput>
         </div>
       </div>
     </>

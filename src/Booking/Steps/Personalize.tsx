@@ -55,6 +55,7 @@ const Personalize = ({
       </p>
       {INSURANCE.map((option, key) => (
         <InsuranceCard
+          key={key}
           insuranceName={option.name}
           cost={option.cost}
           description={option.description}

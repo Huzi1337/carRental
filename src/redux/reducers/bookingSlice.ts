@@ -57,7 +57,6 @@ const bookingSlice = createSlice({
       return { ...state, ...action.payload };
     },
     setPricePerDay: (state, action: PayloadAction<number>) => {
-      console.log(action.payload);
       return { ...state, pricePerDay: action.payload };
     },
     setIsComplete: (state) => {

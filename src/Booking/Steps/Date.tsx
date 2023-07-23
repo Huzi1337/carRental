@@ -35,7 +35,7 @@ const Date = ({ form, pricePerDay, rentCost }: Props) => {
         </>
       )}
 
-      <p className="booking__diff__location">
+      <div className="booking__diff__location">
         <Checkbox
           label="Return at different location"
           checked={isDifferentDropOffLocation}
@@ -43,7 +43,7 @@ const Date = ({ form, pricePerDay, rentCost }: Props) => {
             setIsDifferentDropOffLocation(event.currentTarget.checked)
           }
         ></Checkbox>
-      </p>
+      </div>
       <div className="booking__row date">
         <div className="booking__col">
           <label>Pick-up Date and Time</label>

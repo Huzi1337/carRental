@@ -63,12 +63,16 @@ const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
         value.length === 0 ? "Please provide your first name." : null,
       lastName: (value) =>
         value.length === 0 ? "Please provide your last name." : null,
-      // birthDate: (value) =>
-      //   value.length > 0
-      //     ? dayjs(value).diff(dayjs(), "year") < 18
-      //       ? "You must be at least 18 years old to rent a car."
-      //       : null
-      //     : "Please provide your birth date.",
+      cardNumber: (value) =>
+        value.length < 19 ? "Provide a valid credit card number." : null,
+      cardProvider: (value) =>
+        value.length > 0 ? null : "Select a card provider.",
+      name: (value) =>
+        value.trim().length > 2
+          ? null
+          : "Name must consist of at least 2 characters.",
+      exp: (value) => (value.length != 5 ? "Invalid value." : null),
+      cvv: (value) => (value.length != 3 ? "Invalid value." : null),
     },
   });
 
@@ -102,7 +106,6 @@ const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
     Object.keys(values).forEach((key) => {
       form.validateField(key);
       if (!form.isValid(key)) {
-        console.log(form.errors);
         stepValid = false;
       }
     });
@@ -189,20 +192,16 @@ const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
           );
         break;
       default:
-        console.log("Rent Form: step out bounds", currentStep);
         break;
     }
 
     if (direction === "next" && isValid) {
-      console.log("form errors:", form.errors, form.isValid());
       if (currentStep === FORM_STEPS.length - 1) {
         dispatch(setIsComplete());
         return;
       }
 
       incrementCurrentStep();
-
-      console.log("After incrementing current step: ", currentStep);
     } else if (direction === "back") {
       decrementCurrentStep();
     }
