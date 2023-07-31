@@ -1,7 +1,7 @@
 import { UseFormReturnType } from "@mantine/form";
 import { IFormInitialState } from "../../redux/reducers/bookingTypes";
 import "./Payment.scss";
-import { Radio, NumberInput, TextInput } from "@mantine/core";
+import { Radio, TextInput } from "@mantine/core";
 import { ChangeEvent, useEffect, useState } from "react";
 
 const PAYMENT_OPTIONS = ["MasterCard", "Visa", "Bitcoin"];
