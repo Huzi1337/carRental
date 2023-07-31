@@ -11,6 +11,7 @@ import dayjs from "dayjs";
 
 import "./Vehicles.scss";
 import { setRentState } from "../../redux/reducers/bookingSlice";
+import { Loader, LoadingOverlay } from "@mantine/core";
 
 interface Props {
   numberOfCars: number;
@@ -82,7 +83,9 @@ export const Vehicles = ({ numberOfCars, location }: Props) => {
             </Card>
           ))
         ) : (
-          <h3>Loading...</h3>
+          <LoadingOverlay visible>
+            <Loader></Loader>
+          </LoadingOverlay>
         )}
       </div>
     </div>

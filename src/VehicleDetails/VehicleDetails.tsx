@@ -19,6 +19,7 @@ import { setPricePerDay, setRentState } from "../redux/reducers/bookingSlice";
 import { calculateRentCost } from "../utils/calculateRentCost";
 
 import dayjs from "dayjs";
+import { Loader, LoadingOverlay } from "@mantine/core";
 
 interface RentDateConfirmation {
   startDate: Date;
@@ -55,7 +56,12 @@ const VehicleDetails = () => {
           })
       : null;
   }, []);
-  if (!car) return <h1>Loading...</h1>;
+  if (!car)
+    return (
+      <LoadingOverlay visible>
+        <Loader></Loader>
+      </LoadingOverlay>
+    );
 
   const backButtonHandler = () => {
     navigate("/vehicles");
