@@ -23,7 +23,8 @@
 .btn__cars:hover,
 .btn__searchBar:hover,
 .btn__details:hover,
-.btn__form:hover {
+.btn__form:hover,
+.btn__outline:hover {
   transform: scale(1.05);
   background-color: colors.$accent;
   color: colors.$whitest;
@@ -100,6 +101,11 @@
   border: 2px solid colors.$accent;
   color: colors.$accent;
   font-size: font.$textBtn;
+}
+
+.btn__outline:hover {
+  background-color: colors.$white;
+  color: colors.$accent;
 }
 
 .btn__outline.fill {

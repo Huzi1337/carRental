@@ -12,6 +12,10 @@
     padding: 8px 14px;
   }
 
+  input.mantine-Radio-radio {
+    padding: 0;
+  }
+
   hr {
     border-top-width: 2px;
     border-color: colors.$lightGray;
@@ -59,6 +63,7 @@
     height: auto;
   }
   .booking__importantInfo {
+    cursor: pointer;
     color: colors.$accent;
     line-height: 19px;
     margin: 5px 0 12px 12px;

@@ -1,7 +1,7 @@
 export interface IPersonalInfo {
   firstName: string;
   lastName: string;
-  birthDate: string;
+
   email: string;
   drivingLicenseId: string;
   phoneNumber: string;
@@ -11,7 +11,7 @@ export class PersonalInfo implements IPersonalInfo {
   constructor(
     public firstName: string = "",
     public lastName: string = "",
-    public birthDate: string = "",
+
     public email: string = "",
     public drivingLicenseId: string = "",
     public phoneNumber: string = ""

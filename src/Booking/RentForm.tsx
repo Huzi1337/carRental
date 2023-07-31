@@ -21,6 +21,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useMemo, useState } from "react";
 import dayjs from "dayjs";
 import { calculateRentCost } from "../utils/calculateRentCost";
+import { Tooltip } from "@mantine/core";
 
 const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -63,6 +64,14 @@ const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
         value.length === 0 ? "Please provide your first name." : null,
       lastName: (value) =>
         value.length === 0 ? "Please provide your last name." : null,
+      email: (value) =>
+        /^\S+@\S+$/.test(value) ? null : "Please provide a valid email.",
+      drivingLicenseId: (value) =>
+        value.length === 0 ? "Please provide your driving licence id." : null,
+      phoneNumber: (value) =>
+        value.trim().length < 6 || !/^\d+$/.test(value.trim())
+          ? "Please provide a valid phone number."
+          : null,
       cardNumber: (value) =>
         value.length < 19 ? "Provide a valid credit card number." : null,
       cardProvider: (value) =>
@@ -154,7 +163,7 @@ const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
         const {
           firstName,
           lastName,
-          birthDate,
+
           email,
           drivingLicenseId,
           phoneNumber,
@@ -162,7 +171,7 @@ const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
         const personalInfo = {
           firstName,
           lastName,
-          birthDate,
+
           email,
           drivingLicenseId,
           phoneNumber,
@@ -229,9 +238,12 @@ const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
 
         <div className="booking__col sm">
           <div className="booking__summary">
-            <h5 className="booking__importantInfo">
-              <div className="icon"></div>Important Information
-            </h5>
+            <Tooltip label="This car is amazing.">
+              <h5 className="booking__importantInfo">
+                <div className="icon"></div>Important Information
+              </h5>
+            </Tooltip>
+
             <RentSummary
               startDate={form.values.startDate}
               endDate={form.values.endDate}

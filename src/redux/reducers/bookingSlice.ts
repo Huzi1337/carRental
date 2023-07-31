@@ -26,7 +26,7 @@ const INITIAL_STATE: InitialState = {
 
   firstName: "",
   lastName: "",
-  birthDate: "",
+
   email: "",
   drivingLicenseId: "",
   phoneNumber: "",
