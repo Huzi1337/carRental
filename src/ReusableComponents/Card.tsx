@@ -17,7 +17,7 @@ const Card = ({ src, children, className, tint }: Props) => {
   return (
     <div className={"card" + ` ${className}`}>
       <div className="imgContainer__card">
-        <img src={src}></img>
+        <img loading="lazy" src={src}></img>
         {tint ? <div className="tint"></div> : null}
       </div>
 

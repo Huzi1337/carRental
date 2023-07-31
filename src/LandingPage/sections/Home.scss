@@ -2,8 +2,9 @@
 @use "/src/assets/font";
 
 .section.home {
-  background-image: linear-gradient(180deg, #1a7fc380, #373737),
-    url(/home-background.png);
+  position: relative;
+  background-size: cover;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -13,6 +14,43 @@
     color: colors.$white;
     margin: 0 0 10vh 0;
     padding: 0 0 0 15vw;
+  }
+  background-color: transparent;
+  &::before {
+    z-index: -1;
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.section.home.loaded {
+  &::before {
+    background-image: linear-gradient(180deg, #1a7fc380, #373737),
+      url(/home-background.png);
+    animation: focus 0.5s linear;
+  }
+}
+
+@keyframes focus {
+  0% {
+    filter: blur(8px);
+  }
+  100% {
+    filter: blur(0);
+  }
+}
+
+.section.home.pending {
+  &::before {
+    background-image: linear-gradient(180deg, #1a7fc380, #373737),
+      url(/small/home-background.png);
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
   }
 }
 

@@ -16,6 +16,7 @@ const Carousel: React.FC<Props> = ({ imagePath, imageCount }) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    lazyLoad: "progressive",
   };
 
   const imageUrls = Array.from(
