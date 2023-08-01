@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   background-color: colors.$white;
+  max-height: 950px;
 
   h3,
   h5 {
@@ -50,7 +51,7 @@
 @media (max-width: 1200px) {
   .section.location {
     .wrapper__location {
-      padding: 0 10% 10%;
+      padding: 0 10% 5%;
     }
   }
 }

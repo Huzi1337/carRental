@@ -1,9 +1,13 @@
 @use "../assets/colors";
 @use "../assets/font";
 
+.carousel__slider {
+  height: 50%;
+}
+
 .news__image {
   width: 100%;
-  height: 50vh;
+  height: 100%;
 
   background-repeat: no-repeat;
   background-size: cover;

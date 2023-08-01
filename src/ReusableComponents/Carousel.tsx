@@ -25,7 +25,7 @@ const Carousel: React.FC<Props> = ({ imagePath, imageCount }) => {
   );
 
   return (
-    <Slider {...settings}>
+    <Slider className="carousel__slider" {...settings}>
       {imageUrls.map((imageUrl, index) => (
         <div className="news__imageContainer" key={index}>
           <div

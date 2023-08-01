@@ -2,8 +2,8 @@
 @use "/src/assets/font";
 
 .section.news {
-  padding: 17px 0;
-
+  padding: 17px 0 60px;
+  height: fit-content;
   overflow-x: hidden;
 
   .container__horizontal {
