@@ -1,7 +1,4 @@
 import { UseFormReturnType } from "@mantine/form";
-import Button from "../../ReusableComponents/Button";
-
-import { useState } from "react";
 
 import { Slider } from "@mantine/core";
 
@@ -10,29 +7,23 @@ import InsuranceCard from "./Personalize/InsuranceCard";
 
 import "./Personalize.scss";
 
-const INSURANCE = [
-  {
-    name: "Unlimited liability",
-    cost: "Free",
-    description: "You will be fully liable for theft or damage to the vehicle.",
-  },
-  {
-    name: "$8000 excess",
-    cost: "$80/day",
-    description: "You will be only liable for theft or damage up to $8000.",
-  },
-];
+type Insurance = {
+  name: string;
+  cost: number;
+  description: string;
+}[];
 
 const Personalize = ({
   form,
+  insuranceSelectHandler,
+  INSURANCE,
+  selectedInsurance,
 }: {
   form: UseFormReturnType<IFormInitialState>;
+  insuranceSelectHandler: (key: number) => void;
+  INSURANCE: Insurance;
+  selectedInsurance: number;
 }) => {
-  const [selectedInsurance, setSelectedInsurance] = useState(0);
-
-  const insuranceSelectHandler = (index: number) => {
-    setSelectedInsurance(index);
-  };
   return (
     <>
       <hr></hr>
@@ -41,11 +32,14 @@ const Personalize = ({
       <p className="mileage__subtitle">
         Increase or decrease your mileage, only pay for what you need
       </p>
-      <Button onClick={() => {}} className="btn__outline">
-        Calculate road
-      </Button>
+
       <div className="personalize__slider__container">
-        <Slider {...form.getInputProps("mileage")} />
+        <Slider
+          labelAlwaysOn
+          min={0}
+          max={1000}
+          {...form.getInputProps("mileage")}
+        />
       </div>
 
       <hr></hr>

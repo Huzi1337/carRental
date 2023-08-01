@@ -20,7 +20,7 @@ const INITIAL_STATE: InitialState = {
     .toISOString(),
 
   dropOffLocation: "",
-  mileage: 10,
+  mileage: 100,
   price: 0,
   isComplete: false,
 

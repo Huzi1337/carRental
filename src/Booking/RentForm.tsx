@@ -23,6 +23,19 @@ import dayjs from "dayjs";
 import { calculateRentCost } from "../utils/calculateRentCost";
 import { Tooltip } from "@mantine/core";
 
+const INSURANCE = [
+  {
+    name: "Unlimited liability",
+    cost: 0,
+    description: "You will be fully liable for theft or damage to the vehicle.",
+  },
+  {
+    name: "$8000 excess",
+    cost: 80,
+    description: "You will be only liable for theft or damage up to $8000.",
+  },
+];
+
 const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -85,14 +98,27 @@ const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
     },
   });
 
+  const [selectedInsurance, setSelectedInsurance] = useState(0);
+
+  const insuranceSelectHandler = (index: number) => {
+    setSelectedInsurance(index);
+  };
   const memoizedRentCost = useMemo(
     () =>
       calculateRentCost(
         form.values.startDate,
         form.values.endDate,
-        pricePerDay
+        pricePerDay,
+        INSURANCE[selectedInsurance].cost,
+        form.values.mileage
       ),
-    [form.values.startDate, form.values.endDate, pricePerDay]
+    [
+      form.values.startDate,
+      form.values.endDate,
+      pricePerDay,
+      selectedInsurance,
+      form.values.mileage,
+    ]
   );
 
   const FORM_STEPS = [
@@ -104,7 +130,15 @@ const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
       />,
       "Booking Details",
     ],
-    [<Personalize form={form} />, "Personalize Your Rent"],
+    [
+      <Personalize
+        form={form}
+        INSURANCE={INSURANCE}
+        insuranceSelectHandler={insuranceSelectHandler}
+        selectedInsurance={selectedInsurance}
+      />,
+      "Personalize Your Rent",
+    ],
     [<PersonalInformation form={form} />, "Personal Information"],
     [<Payment rentCost={memoizedRentCost} form={form} />, "Payment"],
   ];
