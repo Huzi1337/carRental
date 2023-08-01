@@ -17,6 +17,8 @@
   }
   background-color: transparent;
   &::before {
+    background-repeat: no-repeat;
+    background-size: cover;
     z-index: -1;
     content: " ";
     position: absolute;
