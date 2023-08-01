@@ -7,16 +7,25 @@ import "./RentSummary.scss";
 interface Props {
   contentClass: string;
   rentCost: number;
+  modelName: string;
+  location: string;
   startDate: Date;
   endDate: Date;
 }
 
-const RentSummary = ({ contentClass, rentCost, startDate, endDate }: Props) => {
+const RentSummary = ({
+  contentClass,
+  rentCost,
+  startDate,
+  endDate,
+  modelName,
+  location,
+}: Props) => {
   const rentPeriod = dayjs(endDate).diff(dayjs(startDate), "day");
 
   return (
     <Card className="card__summary" tint={false}>
-      <h4>Tesla Turbo Hybrid</h4>
+      <h4>{modelName}</h4>
       <p>or similar</p>
       <div className="card__summary__iconContainer">
         <div className="card__summary__row">
@@ -30,7 +39,7 @@ const RentSummary = ({ contentClass, rentCost, startDate, endDate }: Props) => {
       <div className="summary__details">
         <h5>Details</h5>
         <IconListItem contentClass={contentClass} iconClass="icon__globe">
-          Gdańsk Airport Poland
+          {location}
         </IconListItem>
         <IconListItem contentClass={contentClass} iconClass="icon__calendar">
           {dayjs(startDate).format("ddd D MMM")}

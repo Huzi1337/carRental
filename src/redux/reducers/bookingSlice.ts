@@ -18,6 +18,7 @@ const INITIAL_STATE: InitialState = {
   endDate: dayjs()
     .set("date", dayjs().date() + 1)
     .toISOString(),
+  carModel: "",
 
   dropOffLocation: "",
   mileage: 100,

@@ -33,6 +33,7 @@ export interface IRentDate {
 
 export interface IRentEssentials extends IRentDate {
   location: string;
+  carModel: string;
 }
 
 export interface IBookingDetails extends IRentEssentials {

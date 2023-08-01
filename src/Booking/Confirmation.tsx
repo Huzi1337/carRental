@@ -11,10 +11,11 @@ import dayjs from "dayjs";
 const Confirmation = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const state = useSelector((state: RootState) => state.booking);
-  const { price, startDate, endDate } = state;
+  const { price, startDate, endDate, location, carModel } = useSelector(
+    (state: RootState) => state.booking
+  );
+
   const btnHandler = () => {
-    console.log(state);
     navigate("/");
     dispatch(resetState());
   };
@@ -25,6 +26,8 @@ const Confirmation = () => {
       <hr></hr>
       <RentSummary
         rentCost={price}
+        location={location}
+        modelName={carModel}
         startDate={dayjs(startDate).toDate()}
         endDate={dayjs(endDate).toDate()}
         contentClass="confirmation__content"

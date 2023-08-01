@@ -36,7 +36,12 @@ const INSURANCE = [
   },
 ];
 
-const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
+const RentForm = ({
+  initialValues,
+  initialValues: { carModel, location },
+}: {
+  initialValues: InitialState;
+}) => {
   const [currentStep, setCurrentStep] = useState(0);
 
   const incrementCurrentStep = () => {
@@ -280,7 +285,9 @@ const RentForm = ({ initialValues }: { initialValues: InitialState }) => {
 
             <RentSummary
               startDate={form.values.startDate}
+              location={location}
               endDate={form.values.endDate}
+              modelName={carModel}
               rentCost={memoizedRentCost}
               contentClass="default"
             />

@@ -75,6 +75,7 @@ const VehicleDetails = () => {
         location,
         startDate: dayjs(startDate).toISOString(),
         endDate: dayjs(endDate).toISOString(),
+        carModel: car.modelName,
       })
     );
     navigate(`/booking/${params.vehicleId}`);
