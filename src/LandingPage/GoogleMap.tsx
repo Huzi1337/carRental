@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 import "./GoogleMap.scss";
 
@@ -82,7 +82,7 @@ const GoogleMap: React.FC = () => {
         });
       }
     }
-  }, []);
+  }, [mapLoaded]);
 
   return (
     <div
