@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 
 import "./GoogleMap.scss";
 
@@ -19,6 +19,7 @@ const cities: City[] = [
 
 const GoogleMap: React.FC = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
+
   const [mapLoaded, setMapLoaded] = useState(false);
 
   useEffect(() => {
@@ -48,6 +49,7 @@ const GoogleMap: React.FC = () => {
 
     async function initMap() {
       // Request needed libraries.
+
       const { current } = mapRef;
       if (current) {
         const { Map } = (await google.maps.importLibrary(
@@ -80,7 +82,7 @@ const GoogleMap: React.FC = () => {
         });
       }
     }
-  }, [mapLoaded]);
+  }, []);
 
   return (
     <div
