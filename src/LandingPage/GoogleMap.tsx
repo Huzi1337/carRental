@@ -63,7 +63,9 @@ const GoogleMap = () => {
       ref={mapRef}
       className="locations__googleMap"
       style={{ overflow: "auto" }}
-    />
+    >
+      <div style={{ minWidth: "100%", minHeight: "100%" }}></div>
+    </div>
   );
 };
 
