@@ -7,7 +7,7 @@ export const Locations = () => {
   return (
     <div id="#locations" className="section location">
       <h4>Location in your Country</h4>
-      <GoogleMap></GoogleMap>
+      <GoogleMap />
       <div className="wrapper__location">
         <div className="container__horizontal">
           {locationHeadline.map(({ iconPath, title, subTitle }, index) => (

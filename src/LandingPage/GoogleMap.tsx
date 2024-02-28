@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 import "./GoogleMap.scss";
 
@@ -17,8 +17,9 @@ const cities: City[] = [
   { name: "Gdansk", lat: 54.352, lng: 18.6466 },
 ];
 
-const GoogleMap: React.FC = () => {
+const GoogleMap = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     initMap();
 
@@ -62,7 +63,7 @@ const GoogleMap: React.FC = () => {
       ref={mapRef}
       className="locations__googleMap"
       style={{ overflow: "auto" }}
-    ></div>
+    />
   );
 };
 
