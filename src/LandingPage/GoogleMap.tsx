@@ -19,8 +19,6 @@ const cities: City[] = [
 
 const GoogleMap: React.FC = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
-  const markersRef = useRef<google.maps.Marker[]>([]);
-  const mapInstanceRef = useRef<google.maps.Map | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
 
   useEffect(() => {
@@ -46,44 +44,41 @@ const GoogleMap: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (mapLoaded) {
-      const mapOptions: google.maps.MapOptions = {
-        center: { lat: 51.9194, lng: 19.1451 },
-        zoom: 6,
-        disableDefaultUI: true,
-      };
+    initMap();
 
-      const map = new google.maps.Map(mapRef.current!, mapOptions);
-      mapInstanceRef.current = map;
+    async function initMap() {
+      // Request needed libraries.
+      const { current } = mapRef;
+      if (current) {
+        const { Map } = (await google.maps.importLibrary(
+          "maps"
+        )) as google.maps.MapsLibrary;
+        const { AdvancedMarkerElement, PinElement } =
+          (await google.maps.importLibrary(
+            "marker"
+          )) as google.maps.MarkerLibrary;
 
-      const markers = cities.map((city) => {
-        const markerIcon = {
-          url: "https://maps.google.com/mapfiles/ms/icons/blue.png",
-          scaledSize: new google.maps.Size(32, 32),
-          fillColor: "blue",
-        };
-
-        const marker = new google.maps.Marker({
-          position: { lat: city.lat, lng: city.lng },
-          title: city.name,
-          map: map,
-          icon: markerIcon,
+        const map = new Map(current as HTMLElement, {
+          center: { lat: 52.4194, lng: 19.1451 },
+          zoom: 6,
+          disableDefaultUI: true,
+          mapId: "4504f8b37365c3d0",
         });
-        return marker;
-      });
 
-      markersRef.current = markers;
-
-      return () => {
-        markersRef.current.forEach((marker) => {
-          marker.setMap(null);
+        cities.forEach((city) => {
+          const { lat, lng } = city;
+          const pinOptions = new PinElement({
+            background: "#2A6FDB",
+            glyphColor: "#FFFFFF",
+            borderColor: "#2A6FDB",
+          });
+          new AdvancedMarkerElement({
+            map,
+            position: { lat, lng },
+            content: pinOptions.element,
+          });
         });
-        markersRef.current = [];
-
-        if (mapInstanceRef.current) {
-          mapInstanceRef.current = null;
-        }
-      };
+      }
     }
   }, [mapLoaded]);
 
